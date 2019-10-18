@@ -62,7 +62,7 @@
                 </div>
                 {% else %}
                 <a class="btn btn-outline-primary mr-2" href="{% url 'login' %}" role="button">Log in</a>
-                <a class="btn btn-primary mr-2" href="#" role="button">Sign up</a>
+                <a class="btn btn-primary mr-2" href="{% url 'user:signup' %}" role="button">Sign up</a>
                 {% endif %}
                 <form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="search" placeholder="Discover PhotoHub"
