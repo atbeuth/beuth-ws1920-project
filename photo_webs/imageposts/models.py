@@ -4,6 +4,7 @@ class Imagepost(models.Model):
     title = models.TextField(max_length=15) 
     img = models.ImageField(upload_to='media', null=True)
     description = models.TextField(max_length=1000)
+    freeuse = models.BooleanField(default=True) 
     tags = models.TextField(max_length=200)
     username = models.TextField(max_length=50) 
     timestamp = models.DateTimeField(auto_now=True) 

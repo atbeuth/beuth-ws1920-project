@@ -1,12 +1,42 @@
 {% extends "web/base.html" %}
-{% block content %}
-    <h1>HOME</h1>
-    <p>New Images</p>
 
-    {% for image in all_imgposts %}
-    <h2>{{ image.title }}</h2>
-    <p>{{ BASE_URL }}</p>
-    <img src="{{ image.img.url }}" alt="{{ image.title }}">
-    
+{% block intro %}
+{% load static %}
+
+<div class="card text-center mt-5" style="border-radius: 0;">
+    <div class="card-body" style="background-image: url({% static "media/img01.jpg" %})">
+    <br>
+      <h5 class="card-title text-info">The place for professional pictures on the net</h5>
+      <p class="card-text text-light">We take care of the presentation and the connection between artists and interested parties, so that you can completely take care of your projects.</p>
+      <br>
+      <a href="#" class="btn btn-info">Wallpapers</a><a href="#" class="btn btn-info ml-2 mr-2">Nature</a><a href="#" class="btn btn-info">Architecture</a>
+      <br><br>
+    </div>
+    <div class="card-footer text-muted">
+      {% if user.is_authenticated %}
+        Get started {{ user.username }}. Add new pictures to your <a href="#" class="text-primary">profile</a>.
+      {% else %}
+      Discover the latest pictures.
+      {% endif %}
+    </div>
+  </div>
+{% endblock intro %}
+
+{% block content %}
+{% for image in all_imgposts %}
+
+<div class="image-card">
+    <img class="image-card-img" src="{{ image.img.url }}">
+
+    <h3 class="image-card-title">{{ image.title }}</h3>
+    <p class="image-card-username">{{ image.username }}<p>
+    <p class="image-card-timestamp">{{ image.timestamp }}<p>
+    {% if image.freeuse %} 
+    <p class="image-card-freeuse">free to use</p>
+    {% endif %}
+    <p class="image-card-description">{{ image.description }}</p>
+    <p class="image-card-tags">{{ image.tags }}</p>
+</div>
+
 {% endfor %}
-{% endblock content %}  
+{% endblock content %}
