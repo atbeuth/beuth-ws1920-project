@@ -15,10 +15,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic.base import TemplateView
+
+from django.conf import settings # new
+from django.conf.urls.static import static # new
+
+from imageposts.views import ImagepostListView
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('web.urls')),
+    path('web/', include('web.urls')),
     path('user/', include('django.contrib.auth.urls')),
     path('user/', include('user.urls')),
-]
+    path('', ImagepostListView.as_view(), name='all-imgposts'),
+    #path('', include('images.urls')),
+    ]

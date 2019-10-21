@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'web',
     'user',
     'bootstrap4',
+    'imageposts.apps.ImagepostsConfig',
 ]
 
 MIDDLEWARE = [
@@ -58,7 +59,7 @@ ROOT_URLCONF = 'photo_webs.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -124,3 +125,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = 'web:index'
 LOGOUT_REDIRECT_URL = '/user/login/?lgo_alert=true'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploaded_content')
+MEDIA_URL = '/uploaded_content/'
+

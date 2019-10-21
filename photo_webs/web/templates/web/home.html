@@ -1,13 +1,12 @@
 {% extends "web/base.html" %}
-
-<!DOCTYPE html>
-<html>
-
-<body>
-
+{% block content %}
     <h1>HOME</h1>
     <p>New Images</p>
 
-</body>
-
-</html>
+    {% for image in all_imgposts %}
+    <h2>{{ image.title }}</h2>
+    <p>{{ BASE_URL }}</p>
+    <img src="{{ image.img.url }}" alt="{{ image.title }}">
+    
+{% endfor %}
+{% endblock content %}  
