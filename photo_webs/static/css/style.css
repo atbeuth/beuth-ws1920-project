@@ -1,29 +1,37 @@
 .image-card {
     position: relative;
     color: white;
+    text-shadow: 0 0 10px black;
+
 }
 
 .image-card-title {
     position: absolute;
     top: 20px;
     left: 20px;
+
+    font-size: 15pt;
 }
 
 .image-card-username {
     position: absolute;
-    top: 80px;
+    top: 60px;
     left: 20px;
+
+    font-size: 10pt;
 }
 
 .image-card-timestamp {
     position: absolute;
-    top: 60px;
+    top: 42px;
     left: 20px;
+
+    font-size: 10pt;
 }
 
 .image-card-freeuse {
     position: absolute;
-    top: 40px;
+    top: 28px;
     right: 20px;
 }
 
@@ -34,12 +42,17 @@
 
 .image-card-description {
     position: absolute;
-    bottom: 50px;
+    bottom: 25px;
     left: 20px;
+    right: 20px;
+
+    font-size: 10pt;
 }
 
 .image-card-tags {
     position: absolute;
-    bottom: 10px;
+    bottom: 1px;
     left: 20px;
+
+    font-size: 10pt;
 }

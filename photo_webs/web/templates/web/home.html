@@ -4,7 +4,9 @@
 {% load static %}
 
 <div class="card text-center mt-5" style="border-radius: 0;">
-    <div class="card-body" style="background-image: url({% static "media/img01.jpg" %})">
+    <div class="card-body" style="background-image: url({% static "media/img01.jpg" %}); background-size:     cover;                      /* <------ */
+    background-repeat: no-repeat;
+    background-position: center center;">
     <br>
       <h5 class="card-title text-info">The place for professional pictures on the net</h5>
       <p class="card-text text-light">We take care of the presentation and the connection between artists and interested parties, so that you can completely take care of your projects.</p>
@@ -14,7 +16,7 @@
     </div>
     <div class="card-footer text-muted">
       {% if user.is_authenticated %}
-        Get started {{ user.username }}. Add new pictures to your <a href="#" class="text-primary">profile</a>.
+        Hello {{ user.username }}. Add new pictures to your <a href="#" class="text-primary">profile</a>.
       {% else %}
       Discover the latest pictures.
       {% endif %}
@@ -29,7 +31,7 @@
     <img class="image-card-img" src="{{ image.img.url }}">
 
     <h3 class="image-card-title">{{ image.title }}</h3>
-    <p class="image-card-username">{{ image.username }}<p>
+    <p class="image-card-username">@{{ image.username }}<p>
     <p class="image-card-timestamp">{{ image.timestamp }}<p>
     {% if image.freeuse %} 
     <p class="image-card-freeuse">free to use</p>

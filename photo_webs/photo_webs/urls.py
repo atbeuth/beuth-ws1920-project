@@ -28,7 +28,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('web/', include('web.urls')),
+    #path('', include('web.urls')),
     path('user/', include('django.contrib.auth.urls')),
     path('user/', include('user.urls')),
     path('', ImagepostListView.as_view(), name='all-imgposts'),

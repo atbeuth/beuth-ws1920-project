@@ -26,7 +26,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -128,7 +128,7 @@ STATICFILES_DIRS = [
 ]
 
 
-LOGIN_REDIRECT_URL = 'web:index'
+LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/user/login/?lgo_alert=true'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploaded_content')

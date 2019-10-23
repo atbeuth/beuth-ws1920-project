@@ -3,7 +3,8 @@ from django.db import models
 class Imagepost(models.Model):
     title = models.TextField(max_length=15) 
     img = models.ImageField(upload_to='media', null=True)
-    description = models.TextField(max_length=1000)
+    description = models.TextField(max_length=100)
+    long_description = models.TextField(max_length=1000, default=description)
     freeuse = models.BooleanField(default=True) 
     tags = models.TextField(max_length=200)
     username = models.TextField(max_length=50) 
