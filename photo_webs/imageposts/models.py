@@ -1,4 +1,5 @@
 from django.db import models
+#model to post an image
 
 class Imagepost(models.Model):
     title = models.TextField(max_length=15) 
@@ -9,7 +10,8 @@ class Imagepost(models.Model):
     tags = models.TextField(max_length=200)
     username = models.TextField(max_length=50) 
     timestamp = models.DateTimeField(auto_now=True) 
-    favs = models.IntegerField()
+    #favs = models.IntegerField()
+
 
     def summary(self):
         return self.title + ': ' + self.description
