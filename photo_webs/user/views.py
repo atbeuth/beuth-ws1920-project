@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.contrib.auth.forms import UserCreationForm
 from django.views import generic
 
-# Create your views here.
 def profile(request):
     return render(request, 'user/profile.html')
 

@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.views.generic import ListView 
 from .models import Imagepost
 
-#Image view Page
 class ImagepostListView(ListView):
     model = Imagepost
     context_object_name = "all_imgposts"
