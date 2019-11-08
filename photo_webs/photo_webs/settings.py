@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'user',
     'bootstrap4',
     'imageposts.apps.ImagepostsConfig',
+    'django_fields',
 ]
 
 MIDDLEWARE = [
@@ -133,4 +134,6 @@ LOGOUT_REDIRECT_URL = '/user/login/?lgo_alert=true'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploaded_content')
 MEDIA_URL = '/uploaded_content/'
+
+DEFAULT_IMAGE_PATH = 'uploaded_content/media/773433.jpg'
 

@@ -1,0 +1,123 @@
+{% extends "user/profile.html" %}
+{% load static %}
+
+{% block nav1 %}<a href="/user/{{ user_p.id }}" class="text-dark pr-2 pl-2">Overview</a>{% endblock nav1 %}
+{% block nav2 %}<a href="/user/settings/" class="text-dark pr-2 pl-2">Edit Info</a>{% endblock nav2 %}
+{% block nav3 %}<a href="#" class="text-dark pr-2 pl-2">Bio</a>{% endblock nav3 %}
+{% block nav4 %}<a href="#" class="text-light pr-2 pl-2">Images</a>{% endblock nav4 %}
+{% block nav5 %}<a href="#" class="text-dark pr-2 pl-2">Following</a>{% endblock nav5 %}
+
+{% block content %}
+
+<div class="card bg-dark" style="width: 100%;">
+  <div class="card-body">
+    <h5 class="card-title text-light">Pinned</h5>
+    <h6 class="card-subtitle mb-2 text-muted">The photographer pinned these works</h6>
+  </div>
+</div>
+
+<div class="gallery-big">
+  {% for image in imagepost_list %}
+  {% if image.user == user and image.pinned%}
+
+  <!-- big imagepost card -->
+  <div class="card rounded-0 bg-dark card-border">
+    <div class="card-header text-light">
+      <img src="{{ image.user.profile.profile_img.url }}" class="rounded border border-primary float-left mr-3"
+        style="width: 25px;" alt="Profile picture of {{ user_p.username }}.">
+      {{ image.user.username }}
+    </div>
+    <figure class="gallery_item-big m-0 p-0">
+      <img src="{{ image.img.url }}" class="gallery_img" alt="{{ image.description }}">
+      <div class="overlay-big">
+        <div class="text">
+          <h3 class="text-danger">{{ image.title }}</h3>
+          <p>{{ image.description }}</p>
+        </div>
+      </div>
+    </figure>
+    <div class="card-footer text-light">
+      {{ image.timestamp }}
+      {% if image.freeuse %}
+      <a class="text-primary float-right ">- free to use</a>
+      {% endif %}
+      <a class="text-primary float-right mr-1">{{ image.category }}</a>
+    </div>
+  </div>
+  <!-- end of big imagepost card -->
+
+  {% endif %}
+  {% endfor %}
+</div>
+
+
+<div class="card bg-dark" style="width: 100%;">
+  <div class="card-body">
+    <h5 class="card-title text-light">Free to use</h5>
+    <h6 class="card-subtitle mb-2 text-muted">These pictures are freely useable. You can do what you want with it
+      without restrictions</h6>
+  </div>
+</div>
+</div>
+
+<div class="gallery card-border">
+  {% for image in imagepost_list %}
+  {% if image.f == user_p.username and image.freeuse%}
+  <figure class="gallery_item">
+    <img src="{{ image.img.url }}" class="gallery_img" alt="Image 1">
+    <div class="overlay">
+      <div class="text text-danger">{{ image.title }}</div>
+      <a class="text text-primary mt-4">{{ image.category }}</a>
+      {% if image.freeuse %}
+      <a class="text text-primary mt-5">free to use</a>
+      {% endif %}
+    </div>
+  </figure>
+  {% endif %}
+  {% endfor %}
+</div>
+
+<div class="card bg-dark" style="width: 100%;">
+  <div class="card-body">
+    <h5 class="card-title text-light">Licensed pictures</h5>
+    <h6 class="card-subtitle mb-2 text-muted">These pictures were provided under special licenses. Read these carefully
+      to know how to use the pictures</h6>
+  </div>
+</div>
+</div>
+
+<div class="gallery-big">
+  {% for image in imagepost_list %}
+  {% if image.user == user_p and not image.freeuse%}
+
+  <!-- big imagepost card -->
+  <div class="card rounded-0 bg-dark card-border">
+    <div class="card-header text-light">
+      <img src="{{ image.user.profile.profile_img.url }}" class="rounded border border-primary float-left mr-3"
+        style="width: 25px;" alt="Profile picture of {{ user_p.username }}.">
+      {{ image.user.username }}
+    </div>
+    <figure class="gallery_item-big m-0 p-0">
+      <img src="{{ image.img.url }}" class="gallery_img" alt="{{ image.description }}">
+      <div class="overlay-big">
+        <div class="text">
+          <h3 class="text-danger">{{ image.title }}</h3>
+          <p>{{ image.description }}</p>
+        </div>
+      </div>
+    </figure>
+    <div class="card-footer text-light">
+      {{ image.timestamp }}
+      {% if image.freeuse%}
+      <a class="text-primary float-right ">- free to use</a>
+      {% endif %}
+      <a class="text-primary float-right mr-1">{{ image.category }}</a>
+    </div>
+  </div>
+  <!-- end of big imagepost card -->
+
+  {% endif %}
+  {% endfor %}
+</div>
+
+{% endblock content %}
