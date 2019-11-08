@@ -3,20 +3,20 @@
 {% block intro %}
 {% load static %}
 
-<div class="card text-center mt-5" style="border-radius: 0;">
-    <div class="card-body" style="background-image: url({% static "media/img01.jpg" %}); background-size:     cover;                      /* <------ */
+<div class="card text-center mt-5 bg-dark" style="border-radius: 0;">
+    <div class="card-body" style="background-image: url({% static "media/default_page_banner.jpeg" %}); background-size: cover;                      /* <------ */
     background-repeat: no-repeat;
     background-position: center center;">
     <br>
-      <h5 class="card-title text-info">The place for professional pictures on the net</h5>
-      <p class="card-text text-light">We take care of the presentation and the connection between artists and interested parties, so that you can completely take care of your projects.</p>
+      <h5 class="card-title text-danger">The place for professional pictures on the net</h5>
+      <p class="card-text text-dark">We take care of the presentation and the connection between artists and interested parties, so you can completely take care of your projects.</p>
       <br>
-      <a href="#" class="btn btn-info">Wallpapers</a><a href="#" class="btn btn-info ml-2 mr-2">Nature</a><a href="#" class="btn btn-info">Architecture</a>
+      <a href="#" class="btn btn-primary">Wallpapers</a><a href="#" class="btn btn-primary ml-2 mr-2">Nature</a><a href="#" class="btn btn-primary">Free to use</a>
       <br><br>
     </div>
-    <div class="card-footer text-muted">
+    <div class="card-footer text-dark bg-primary">
       {% if user.is_authenticated %}
-        Hello {{ user.username }}. Add new pictures to your <a href="#" class="text-primary">profile</a>.
+        Hello {{ user.username }}. Add new pictures to your <a href="{% url 'user:profile' %}{{ user.id }}" class="text-light">profile</a>.
       {% else %}
       Discover the latest pictures.
       {% endif %}
@@ -27,18 +27,31 @@
 {% block content %}
 {% for image in all_imgposts %}
 
-<div class="image-card">
-    <img class="image-card-img" src="{{ image.img.url }}">
-
-    <h3 class="image-card-title">{{ image.title }}</h3>
-    <p class="image-card-username">@{{ image.username }}<p>
-    <p class="image-card-timestamp">{{ image.timestamp }}<p>
-    {% if image.freeuse %} 
-    <p class="image-card-freeuse">free to use</p>
-    {% endif %}
-    <p class="image-card-description">{{ image.description }}</p>
-    <p class="image-card-tags">{{ image.tags }}</p>
-</div>
+<!-- big imagepost card -->
+  <div class="card rounded-0 bg-dark card-border">
+    <div class="card-header text-light">
+      <img src="{{ image.user.profile.profile_img.url }}" class="rounded border border-primary float-left mr-3"
+        style="width: 25px;" alt="Profile picture of {{ user.username }}.">
+      {{ image.user.username }}
+    </div>
+    <figure class="gallery_item-big m-0 p-0">
+      <img src="{{ image.img.url }}" class="gallery_img" alt="{{ image.description }}">
+      <div class="overlay-big">
+        <div class="text">
+          <h3 class="text-danger">{{ image.title }}</h3>
+          <p>{{ image.description }}</p>
+        </div>
+      </div>
+    </figure>
+    <div class="card-footer text-light">
+      {{ image.timestamp }}
+      {% if image.freeuse%}
+      <a class="text-primary float-right ">- free to use</a>
+      {% endif %}
+      <a class="text-primary float-right mr-1">{{ image.category }}</a>
+    </div>
+  </div>
+  <!-- end of big imagepost card -->
 
 {% endfor %}
 {% endblock content %}

@@ -1,13 +1,28 @@
 from django.db import models
 
+from django.contrib.auth.models import User
+
+CATEGORY_CHOICES = (
+    ('no category','NO CATEGORY'),
+    ('nature','NATURE'),
+    ('humans', 'HUMANS'),
+    ('animals','ANIMALS'),
+    ('buildings','BUILDINGS'),
+    ('abstract','ABSTRACT'),
+    ('wallpaper','WALLPAPER'),
+)
+
 class Imagepost(models.Model):
     title = models.TextField(max_length=15) 
-    img = models.ImageField(upload_to='media', null=True)
+    img = models.ImageField(upload_to='media', null=True, default='media/773433.jpg')
     description = models.TextField(max_length=100)
     long_description = models.TextField(max_length=1000, default=description)
     freeuse = models.BooleanField(default=True) 
+    pinned = models.BooleanField(default=False) 
+    category = models.CharField(max_length=30, choices=CATEGORY_CHOICES, default='green')
     tags = models.TextField(max_length=200)
     username = models.TextField(max_length=50) 
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     timestamp = models.DateTimeField(auto_now=True) 
     favs = models.IntegerField()
 

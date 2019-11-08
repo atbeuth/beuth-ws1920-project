@@ -6,12 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <link rel="stylesheet" href="static/css/style.css">
+    {% block head %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static "/css/style.css" %}">
+    <script src="{% static "/js/btt.js"%}"></script>
+    {% endblock head %}
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    
+
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
@@ -25,12 +29,13 @@
     <title>PhotoHub - {% block title %} Home {% endblock title %}</title>
 </head>
 
-<body class="bg-dark">
+<body class="bg-dark" name="top">
     <header>
-        <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
             <!-- logo and name -->
             <a class="navbar-brand" href="/">
-                <img src="/docs/4.0/assets/brand/bootstrap-solid.svg" width="30" height="30"
+                {% load static %}
+                <img src="{% static "icons/logo_photohub_red.png" %}" width="30" height="30"
                     class="d-inline-block align-top" alt="">
                 PhotoHub
             </a>
@@ -56,7 +61,7 @@
                         {{ user.username }}
                     </button>
                     <div class="dropdown-menu"">
-                              <a href=" #" class="dropdown-item">My profile</a>
+                              <a href="{% url 'user:profile' %}{{ user.id }}" class="dropdown-item">My profile</a>
                         <a href="#" class="dropdown-item">Settings</a>
                         <div class="dropdown-divider"></div>
                         <a href="{% url 'logout' %}" class="dropdown-item">Not {{ user.username }}? Log out</a>
@@ -76,6 +81,10 @@
     </header>
     {% block intro %} {% endblock intro %}
     {% block content %} {% endblock content %}
+    {% block floating_nav %}
+    <a class="btn btn-primary floating_button2" onclick="topFunction()" id="myBtn" href="#top">back to top</a>
+    <a class="btn btn-primary floating_button" href="#" role="button">+ upload image</a>
+    {% endblock floating_nav %}
 </body>
 
 </html>
