@@ -2,8 +2,6 @@ from django.shortcuts import render
 from django.contrib.auth.forms import UserCreationForm
 from django.views import generic
 
-<<<<<<< HEAD
-=======
 from django.views.generic import DetailView, ListView, UpdateView
 from django.contrib.auth.models import User
 from imageposts.models import Imagepost
@@ -14,7 +12,6 @@ from multi_form_view import MultiModelFormView
 from .forms import UserForm, ProfileForm
 
 # Create your views here.
->>>>>>> b1dbd98c52effb7dff7a666177bf280a9eaa52cb
 def profile(request):
     return render(request, 'user/profile.html')
 
