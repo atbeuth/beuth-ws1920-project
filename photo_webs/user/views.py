@@ -6,7 +6,7 @@ from django.views.generic import DetailView, ListView, UpdateView
 from django.contrib.auth.models import User
 from imageposts.models import Imagepost
 
-from .models import Profile
+from .models import Profile, Follower
 
 from multi_form_view import MultiModelFormView
 from .forms import UserForm, ProfileForm
@@ -15,6 +15,7 @@ from .forms import UserForm, ProfileForm
 def profile(request):
     return render(request, 'user/profile.html')
 
+# DetailViews
 class UserDetailView(DetailView):
     model = User
     template_name= 'user/profile.html'
@@ -35,6 +36,17 @@ class UserImagesView(DetailView):
 self).get_context_data(**kwargs)
         context['user_list'] = User.objects.all()
         context['imagepost_list'] = Imagepost.objects.all()
+        return context
+
+# ListViews
+class FollowerView(DetailView):
+    model = User
+    template_name= 'user/profile_follows.html'
+    context_object_name = "user_p"
+    def get_context_data(self, **kwargs):
+        context = super(FollowerView,
+self).get_context_data(**kwargs)
+        context['follower_list'] = Follower.objects.all()
         return context
 
 class UserSettingsView(MultiModelFormView):

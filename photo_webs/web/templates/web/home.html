@@ -31,9 +31,11 @@
 <!-- big imagepost card -->
   <div class="card rounded-0 bg-dark card-border">
     <div class="card-header text-light">
+    <a href="{% url 'user:profile' %}{{image.user.id}}" class="text-white">
       <img src="{{ image.user.profile.profile_img.url }}" class="rounded border border-primary float-left mr-3"
         style="width: 25px;" alt="Profile picture of {{ user.username }}.">
       {{ image.user.username }}
+      </a>
     </div>
     <figure class="gallery_item-big m-0 p-0">
       <img src="{{ image.img.url }}" class="gallery_img" alt="{{ image.description }}">

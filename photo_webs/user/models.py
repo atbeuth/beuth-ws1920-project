@@ -16,11 +16,24 @@ class Profile(models.Model):
     show_email = models.BooleanField(default=False)
     birth_date = models.DateField(null=True, blank=True)
 
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
+    follow = models.ManyToManyField('self', related_name='follows', symmetrical=False)
 
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
-    instance.profile.save()
+    @receiver(post_save, sender=User)
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+            Profile.objects.create(user=instance)
+
+    @receiver(post_save, sender=User)
+    def save_user_profile(sender, instance, **kwargs):
+        instance.profile.save()
+
+
+class Follower(models.Model):
+    follower = models.ForeignKey(User, related_name='following', on_delete=models.CASCADE)
+    following = models.ForeignKey(User, related_name='followers', on_delete=models.CASCADE)
+    
+    class Meta:
+        unique_together = ('follower', 'following')
+
+    def __unicode__(self):
+        return u'%s follows %s' % (self.follower, self.following)
