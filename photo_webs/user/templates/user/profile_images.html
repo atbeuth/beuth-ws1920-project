@@ -62,7 +62,7 @@
 
 <div class="gallery card-border">
   {% for image in imagepost_list %}
-  {% if image.f == user_p.username and image.freeuse%}
+  {% if image.user == user_p and image.freeuse%}
   <figure class="gallery_item">
     <img src="{{ image.img.url }}" class="gallery_img" alt="Image 1">
     <div class="overlay">
