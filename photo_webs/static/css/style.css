@@ -43,7 +43,7 @@
 
 .image-card-img {
     max-width: 100%;
-    height: auto;  
+    height: auto;
 }
 
 .image-card-description {
@@ -186,6 +186,10 @@
     background-color: rgba(0,0,0,1); /* Black background with opacity */
     z-index: 10; /* Specify a stack order in case you're using a different order for other elements */
     cursor: pointer; /* Add a pointer on hover */
+}
+
+.img-thumbnail {
+    box-shadow: 0px 5px 30px -5px rgb(0, 0, 0);
 }
 
 /* media query for desktop */
