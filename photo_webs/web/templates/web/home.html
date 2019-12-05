@@ -32,9 +32,12 @@
   <div class="card rounded-0 bg-dark card-border">
     <div class="card-header text-light">
     <a href="{% url 'user:profile' %}{{image.user.id}}" class="text-white">
-      <img src="{{ image.user.profile.profile_img.url }}" class="rounded border border-primary float-left mr-3"
-        style="width: 25px;" alt="Profile picture of {{ user.username }}.">
+      <img src="{{ image.user.profile.profile_img.url }}" class="rounded border border-primary float-left mr-3 profile-images-mini"
+      alt="Profile picture of {{ user.username }}.">
       {{ image.user.username }}
+      {% if image.user.is_staff %}<span class="badge badge-secondary">PhotoHub-Team</span> {% endif %}
+      {% if image.user.profile.is_verified %}<span class="badge badge-info">verified</span> {% endif %}
+      {% if image.user.profile.is_pro %}<span class="badge badge-light">PRO</span> {% endif %}
       </a>
     </div>
     <figure class="gallery_item-big m-0 p-0">

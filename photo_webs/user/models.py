@@ -16,6 +16,10 @@ class Profile(models.Model):
     show_email = models.BooleanField(default=False)
     birth_date = models.DateField(null=True, blank=True)
 
+    # for badges
+    is_verified = models.BooleanField(default=False) 
+    is_pro = models.BooleanField(default=False)
+
     follow = models.ManyToManyField('self', related_name='follows', symmetrical=False)
 
     @receiver(post_save, sender=User)
