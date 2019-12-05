@@ -83,7 +83,7 @@
     {% block content %} {% endblock content %}
     {% block floating_nav %}
     <a class="btn btn-primary floating_button2" onclick="topFunction()" id="myBtn" href="#top">back to top</a>
-    <a class="btn btn-primary floating_button" href="#" role="button">+ upload image</a>
+    <a class="btn btn-primary floating_button" href="{% url 'imageposts:add-post' %}" role="button">+ upload image</a>
     {% endblock floating_nav %}
 </body>
 

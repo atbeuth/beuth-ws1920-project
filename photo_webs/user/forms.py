@@ -1,7 +1,7 @@
 from django import forms
 
 from django.contrib.auth.models import User
-from .models import Profile, Follower
+from .models import Profile, Follower, Post
 
 class UserForm(forms.ModelForm):
 
@@ -20,3 +20,4 @@ class FollowerForm(forms.ModelForm):
     class Meta(object):
         model = Follower
         fields = ['follower', 'following']
+

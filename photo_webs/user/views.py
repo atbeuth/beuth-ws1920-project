@@ -1,15 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.views import generic
 
-from django.views.generic import DetailView, ListView, UpdateView
+from django.views.generic import DetailView, ListView, UpdateView, FormView
 from django.contrib.auth.models import User
 from imageposts.models import Imagepost
 
-from .models import Profile, Follower
+from .models import Profile, Follower, Post
 
 from multi_form_view import MultiModelFormView
 from .forms import UserForm, ProfileForm
+from django.urls import reverse_lazy 
 
 # Create your views here.
 def profile(request):
@@ -68,3 +69,8 @@ class SignUp(generic.CreateView):
     form_class = UserCreationForm
     success_url = '/user/login/?sgu_alert=1'
     template_name = 'registration/signup.html'
+
+
+
+
+    

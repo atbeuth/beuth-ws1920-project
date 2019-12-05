@@ -29,6 +29,7 @@ urlpatterns = [
     #path('', include('web.urls')),
     path('user/', include('django.contrib.auth.urls')),
     path('user/', include('user.urls')),
+    path('imageposts/', include('imageposts.urls')),
     path('', ImagepostListView.as_view(), name='all-imgposts'),
     #path('', include('images.urls')),
     ]

@@ -37,3 +37,10 @@ class Follower(models.Model):
 
     def __unicode__(self):
         return u'%s follows %s' % (self.follower, self.following)
+
+class Post(models.Model):
+    title = models.TextField()
+    cover = models.ImageField(upload_to='media')
+
+    def __str__(self):
+        return self.title
