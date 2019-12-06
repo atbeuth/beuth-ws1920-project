@@ -17,18 +17,17 @@
 </div>
 
 <div class="gallery-big mini-cards">
-    {% for follower in follower_list %}
-    {% if user_p == follower.follower%}
+    {% for follower in user_p.profile.followers.all %}
     <div class="card bg-dark text-light">
         <div class="card-body">
-            <img src="{{ follower.following.profile.profile_img.url }}"
+        <a href="{% url 'user:profile' %}{{follower.id}}" class="text-white">
+           <img src="{{ follower.profile.profile_img.url }}"
                 class="rounded border border-primary float-left mr-3" style="width: 50px;"
-                alt="Profile picture of {{ follower.following.username }}.">
-            {{follower.following}}
-            <br>{{follower.following.profile.bio_short}}
+                alt="Profile picture of {{ follower.username }}.">
+            {{follower}}
+            <br>{{follower.profile.bio_short}}</a>
         </div>
     </div>
-    {% endif %}
     {% endfor %}
 </div>
 
@@ -40,18 +39,16 @@
 </div>
 
 <div class="gallery-big mini-cards">
-        {% for follower in follower_list %}
-        {% if user_p == follower.following%}
+        {% for follower in user_p.profile.following.all %}
         <div class="card bg-dark text-light">
             <div class="card-body">
-                <img src="{{ follower.follower.profile.profile_img.url }}"
+                <img src="{{ follower.profile.profile_img.url }}"
                     class="rounded border border-primary float-left mr-3" style="width: 50px;"
-                    alt="Profile picture of {{ follower.follower.username }}.">
-                {{follower.follower}}
-                <br>{{follower.follower.profile.bio_short}}
+                    alt="Profile picture of {{ follower.username }}.">
+                {{follower}}
+                <br>{{follower.profile.bio_short}}
             </div>
         </div>
-        {% endif %}
         {% endfor %}
     </div>
 
