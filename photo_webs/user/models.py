@@ -4,6 +4,16 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django_fields import DefaultStaticImageField
 
+class Profile_Manager(models.Manager):
+    def toggle_follow(self, request_user, username_to_toggle):
+        profile = Profile.objects.get(user__username__iexact=username_to_toggle)
+        user = request_user
+        if user in profile.followers.all():
+            profile.followers.remove(user)
+        else:
+            profile.followers.add(user)
+        return profile
+
 # Create your models here.
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -16,7 +26,14 @@ class Profile(models.Model):
     show_email = models.BooleanField(default=False)
     birth_date = models.DateField(null=True, blank=True)
 
-    follow = models.ManyToManyField('self', related_name='follows', symmetrical=False)
+    following = models.ManyToManyField(User, related_name='following', blank=True) # These users I am following
+    followers = models.ManyToManyField(User, related_name='is_following', blank=True) # These users are following me
+
+    objects = Profile_Manager()
+
+    # for badges
+    is_verified = models.BooleanField(default=False) 
+    is_pro = models.BooleanField(default=False)
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
@@ -29,11 +46,18 @@ class Profile(models.Model):
 
 
 class Follower(models.Model):
-    follower = models.ForeignKey(User, related_name='following', on_delete=models.CASCADE)
-    following = models.ForeignKey(User, related_name='followers', on_delete=models.CASCADE)
+    follower = models.ForeignKey(User, related_name='followinga', on_delete=models.CASCADE)
+    following = models.ForeignKey(User, related_name='followersa', on_delete=models.CASCADE)
     
     class Meta:
         unique_together = ('follower', 'following')
 
     def __unicode__(self):
         return u'%s follows %s' % (self.follower, self.following)
+
+class Post(models.Model):
+    title = models.TextField()
+    cover = models.ImageField(upload_to='media')
+
+    def __str__(self):
+        return self.title

@@ -10,6 +10,5 @@ urlpatterns = [
     path('<int:pk>/', views.UserDetailView.as_view(), name='profile'),
     path('<int:pk>/images/', views.UserImagesView.as_view(), name='profile-images'),
     path('<int:pk>/followers/', views.FollowerView.as_view(), name='profile-follows'),
-
     path('signup/', views.SignUp.as_view(), name='signup'),
 ]

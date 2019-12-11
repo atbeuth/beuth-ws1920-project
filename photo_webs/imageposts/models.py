@@ -24,7 +24,7 @@ class Imagepost(models.Model):
     username = models.TextField(max_length=50) 
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     timestamp = models.DateTimeField(auto_now=True) 
-    favs = models.IntegerField()
+    favs = models.IntegerField(default=0)
 
 
     def summary(self):

@@ -31,6 +31,7 @@
 
 <body class="bg-dark" name="top">
     <header>
+
         <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
             <!-- logo and name -->
             <a class="navbar-brand" href="/">
@@ -50,8 +51,14 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">The PhotoHub license</a>
                     </li>
-
+                    {% if user.is_staff %}
+                    <li class="nav-item">
+                            <a class="nav-link text-warning" href="/admin">/admin</a>
+                    </li>
+                    {% endif %}
                 </ul>
+
+                
 
                 <!-- user dropdown or login buttons-->
                 {% if user.is_authenticated %}
@@ -79,11 +86,12 @@
             </div>
         </nav>
     </header>
+
     {% block intro %} {% endblock intro %}
     {% block content %} {% endblock content %}
     {% block floating_nav %}
     <a class="btn btn-primary floating_button2" onclick="topFunction()" id="myBtn" href="#top">back to top</a>
-    <a class="btn btn-primary floating_button" href="#" role="button">+ upload image</a>
+    <a class="btn btn-primary floating_button" href="{% url 'imageposts:add-post' %}" role="button">+ upload image</a>
     {% endblock floating_nav %}
 </body>
 

@@ -11,7 +11,14 @@
     
   </div>
   <div class="card-body bg-dark p-4">
-    <h5 class="card-title text-danger ">{{ user_p.username }}</h5>
+    <h5 class="card-title text-danger ">{{ user_p.username }} {% if user_p.is_staff %}<span class="badge badge-secondary">PhotoHub-Team</span> {% endif %}{% if user_p.profile.is_verified %}<span class="badge badge-info">verified</span> {% endif %}{% if user_p.profile.is_pro %}<span class="badge badge-light">PRO</span> {% endif %}</h5>
+    
+    {% block follow %}
+    {% if user.is_authenticated and user != user_p %}
+    <p>{% include 'user/snippet/follow_form.html' with username=user_p.username is_following=is_following %}</p>
+    {% endif %}
+    {% endblock follow %}
+    
     <p class="card-text text-light">{{ user_p.profile.bio_short }}</p>
     {% if user_p.profile.show_email and user_p.email%}
     <a href="mailto:{{ user_p.email }}?subject=PhotoHub" class="card-text text-primary">Email: {{ user_p.email }}</a>
@@ -38,7 +45,7 @@
 {% block content %}
 <div class="gallery">
 {% for image in imagepost_list %}
-{% if image.user_pname == user_p.user_pname%}
+{% if image.user == user_p %}
  <figure class="gallery_item">
     <img src="{{ image.img.url }}" class="gallery_img" alt="Image 1">
     <div class="overlay">
