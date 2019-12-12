@@ -5,4 +5,4 @@ class ImagepostForm(forms.ModelForm):
     
     class Meta:
         model = Imagepost
-        fields = ['title', 'img', 'description', 'long_description','freeuse','pinned','category','tags']
+        fields = ['title', 'img', 'description','long_description','freeuse','pinned','category','tags']
