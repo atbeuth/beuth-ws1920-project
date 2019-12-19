@@ -47,7 +47,7 @@
 {% for image in imagepost_list %}
 {% if image.user == user_p %}
  <figure class="gallery_item">
-    <img src="{{ image.img.url }}" class="gallery_img" alt="Image 1">
+    <img src="{{ image.img_thumbnail.url }}" class="gallery_img" alt="Image 1">
     <div class="overlay">
       <div class="text text-danger">{{ image.title }}</div>
       <a class="text text-primary mt-4">{{ image.category }}</a>
