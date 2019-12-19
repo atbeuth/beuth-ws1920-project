@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'bootstrap4',
     'imageposts.apps.ImagepostsConfig',
     'django_fields',
-    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

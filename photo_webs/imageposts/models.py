@@ -15,6 +15,7 @@ CATEGORY_CHOICES = (
 class Imagepost(models.Model):
     title = models.TextField(max_length=15) 
     img = models.ImageField(upload_to='media', null=True, default='media/773433.jpg')
+    img_thumbnail = models.ImageField(upload_to='media/thumbnails', null=True, default='media/773433.jpg')
     description = models.TextField(max_length=100)
     long_description = models.TextField(max_length=1000)
     freeuse = models.BooleanField(default=True) 
@@ -25,7 +26,6 @@ class Imagepost(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     timestamp = models.DateTimeField(auto_now=True) 
     favs = models.IntegerField(default=0)
-    print (dir(description))
 
     def summary(self):
         return self.title + ': ' + self.description

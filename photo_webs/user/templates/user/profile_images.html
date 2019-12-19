@@ -27,7 +27,7 @@
             {% if image.user.profile.is_pro %}<span class="badge badge-light">PRO</span> {% endif %}
         </div>
         <figure class="gallery_item-big m-0 p-0">
-            <img src="{{ image.img.url }}" class="gallery_img" alt="{{ image.description }}">
+            <img src="{{ image.img_thumbnail.url }}" class="gallery_img" alt="{{ image.description }}">
             <div class="overlay-big">
                 <div class="text">
                     <h3 class="text-danger">{{ image.title }}</h3>
@@ -58,7 +58,7 @@
 <div class="gallery card-border">
     {% for image in imagepost_list %} {% if image.user == user_p and image.freeuse%}
     <figure class="gallery_item">
-        <img src="{{ image.img.url }}" class="gallery_img" alt="Image 1">
+        <img src="{{ image.img_thumbnail.url }}" class="gallery_img" alt="Image 1">
         <div class="overlay">
             <div class="text text-danger">{{ image.title }}</div>
             <a class="text text-primary mt-4">{{ image.category }}</a> {% if image.freeuse %}
@@ -88,7 +88,7 @@
             {% if image.user.profile.is_pro %}<span class="badge badge-light">PRO</span> {% endif %}
         </div>
         <figure class="gallery_item-big m-0 p-0">
-            <img src="{{ image.img.url }}" class="gallery_img" alt="{{ image.description }}">
+            <img src="{{ image.img_thumbnail.url }}" class="gallery_img" alt="{{ image.description }}">
             <div class="overlay-big">
                 <div class="text">
                     <h3 class="text-danger">{{ image.title }}</h3>
