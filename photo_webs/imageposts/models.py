@@ -25,7 +25,6 @@ class Imagepost(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     timestamp = models.DateTimeField(auto_now=True) 
     favs = models.IntegerField(default=0)
-    print (dir(description))
 
     def summary(self):
         return self.title + ': ' + self.description
