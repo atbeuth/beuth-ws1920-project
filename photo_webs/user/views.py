@@ -28,7 +28,7 @@ class UserDetailView(DetailView):
     def post(self, request, *args, **kwargs):        
         username_to_toggle = request.POST.get("username").strip()
         profile = Profile.objects.toggle_follow(request.user, username_to_toggle)
-        return HttpResponseRedirect("")
+        return HttpResponseRedirect(request.POST.get("url").strip())
 
     def get_context_data(self, **kwargs):
         context = super(UserDetailView,
@@ -53,7 +53,7 @@ class UserImagesView(DetailView):
     def post(self, request, *args, **kwargs):        
         username_to_toggle = request.POST.get("username").strip()
         profile = Profile.objects.toggle_follow(request.user, username_to_toggle)
-        return HttpResponseRedirect("")
+        return HttpResponseRedirect(request.POST.get("url").strip())
 
     def get_context_data(self, **kwargs):
         context = super(UserImagesView,
@@ -79,7 +79,7 @@ class FollowerView(DetailView):
     def post(self, request, *args, **kwargs):        
         username_to_toggle = request.POST.get("username").strip()
         profile = Profile.objects.toggle_follow(request.user, username_to_toggle)
-        return HttpResponseRedirect("")
+        return HttpResponseRedirect(request.POST.get("url").strip())
         
     def get_context_data(self, **kwargs):
         context = super(FollowerView,
