@@ -18,11 +18,10 @@
 
 <div class="gallery-big mini-cards">
     {% for follower in user_p.profile.following.all %}
-    <p>Hiii</p>
     <div class="card bg-dark text-light">
         <div class="card-body">
         <a href="{% url 'user:profile' %}{{follower.id}}" class="text-white">
-           <img src="{{ follower.profile.profile_img.url }}"
+            <img src="{{ follower.profile.profile_img.url }}"
                 class="rounded border border-primary float-left mr-3" style="width: 50px;"
                 alt="Profile picture of {{ follower.username }}.">
             {{follower}}
@@ -40,17 +39,18 @@
 </div>
 
 <div class="gallery-big mini-cards">
-        {% for follower in user_p.profile.followers.all %}
-        <div class="card bg-dark text-light">
-            <div class="card-body">
-                <img src="{{ follower.profile.profile_img.url }}"
-                    class="rounded border border-primary float-left mr-3" style="width: 50px;"
-                    alt="Profile picture of {{ follower.username }}.">
-                {{follower}}
-                <br>{{follower.profile.bio_short}}
-            </div>
+    {% for follower in user_p.profile.followers.all %}
+    <div class="card bg-dark text-light">
+        <div class="card-body">
+        <a href="{% url 'user:profile' %}{{follower.id}}" class="text-white">
+            <img src="{{ follower.profile.profile_img.url }}"
+                class="rounded border border-primary float-left mr-3" style="width: 50px;"
+                alt="Profile picture of {{ follower.username }}.">
+            {{follower}}
+            <br>{{follower.profile.bio_short}}</a>
         </div>
-        {% endfor %}
     </div>
+    {% endfor %}
+</div>
 
 {% endblock content %}
