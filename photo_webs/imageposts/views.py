@@ -16,7 +16,7 @@ class ImagepostListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ImagepostListView, self).get_context_data(**kwargs) 
-        context['imgposts_list'] = Imagepost.objects.all() 
+        context['imgposts_list'] = Imagepost.objects.all()
         return context
 
 def create_thumbnail(imageFile, imageName):
@@ -65,16 +65,13 @@ def create_thumbnail(imageFile, imageName):
     im_file = InMemoryUploadedFile(im_io, None, imageName, 'image/jpeg', sys.getsizeof(im_io), None)
     return im_file
 
-
 def add_post(request):
     if request.method == 'POST':
         form = ImagepostForm(request.POST, request.FILES)
         if form.is_valid():
             imagepost=form.save()
             imagepost.user=request.user
-
             imagepost.img_thumbnail = create_thumbnail(form.cleaned_data['img'], imagepost.img.name)
-
             imagepost.save()
             return redirect('/') 
     else:
