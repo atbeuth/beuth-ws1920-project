@@ -17,7 +17,8 @@
 </div>
 
 <div class="gallery-big mini-cards">
-    {% for follower in user_p.profile.followers.all %}
+    {% for follower in user_p.profile.following.all %}
+    <p>Hiii</p>
     <div class="card bg-dark text-light">
         <div class="card-body">
         <a href="{% url 'user:profile' %}{{follower.id}}" class="text-white">
@@ -39,7 +40,7 @@
 </div>
 
 <div class="gallery-big mini-cards">
-        {% for follower in user_p.profile.following.all %}
+        {% for follower in user_p.profile.followers.all %}
         <div class="card bg-dark text-light">
             <div class="card-body">
                 <img src="{{ follower.profile.profile_img.url }}"
