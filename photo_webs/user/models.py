@@ -5,13 +5,14 @@ from django.dispatch import receiver
 from django_fields import DefaultStaticImageField
 
 class Profile_Manager(models.Manager):
-    def toggle_follow(self, request_user, username_to_toggle):
+    def toggle_follow(self, user, request_user, username_to_toggle):
         profile = Profile.objects.get(user__username__iexact=username_to_toggle)
-        user = request_user
-        if user in profile.followers.all():
-            profile.followers.remove(user)
+        if request_user in profile.followers.all():
+            profile.followers.remove(request_user)
+            request_user.profile.following.remove(user)
         else:
-            profile.followers.add(user)
+            profile.followers.add(request_user)
+            request_user.profile.following.add(user)
         return profile
 
 # Create your models here.
