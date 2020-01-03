@@ -27,8 +27,16 @@ class UserDetailView(DetailView):
 
     def post(self, request, *args, **kwargs):        
         username_to_toggle = request.POST.get("username").strip()
-        profile = Profile.objects.toggle_follow(request.user, username_to_toggle)
-        return HttpResponseRedirect("")
+
+        users = User.objects.all()
+        user = None
+
+        for current_user in users:
+            if current_user.username == username_to_toggle:
+                user = current_user
+
+        profile = Profile.objects.toggle_follow(user, request.user, username_to_toggle)
+        return HttpResponseRedirect(request.POST.get("url").strip())
 
     def get_context_data(self, **kwargs):
         context = super(UserDetailView,
@@ -52,8 +60,16 @@ class UserImagesView(DetailView):
 
     def post(self, request, *args, **kwargs):        
         username_to_toggle = request.POST.get("username").strip()
-        profile = Profile.objects.toggle_follow(request.user, username_to_toggle)
-        return HttpResponseRedirect("")
+
+        users = User.objects.all()
+        user = None
+
+        for current_user in users:
+            if current_user.username == username_to_toggle:
+                user = current_user
+
+        profile = Profile.objects.toggle_follow(user, request.user, username_to_toggle)
+        return HttpResponseRedirect(request.POST.get("url").strip())
 
     def get_context_data(self, **kwargs):
         context = super(UserImagesView,
@@ -76,10 +92,18 @@ class FollowerView(DetailView):
     template_name= 'user/profile_follows.html'
     context_object_name = "user_p"
 
-    def post(self, request, *args, **kwargs):        
+    def post(self, request, *args, **kwargs):
         username_to_toggle = request.POST.get("username").strip()
-        profile = Profile.objects.toggle_follow(request.user, username_to_toggle)
-        return HttpResponseRedirect("")
+
+        users = User.objects.all()
+        user = None
+
+        for current_user in users:
+            if current_user.username == username_to_toggle:
+                user = current_user
+
+        profile = Profile.objects.toggle_follow(user, request.user, username_to_toggle)
+        return HttpResponseRedirect(request.POST.get("url").strip())
         
     def get_context_data(self, **kwargs):
         context = super(FollowerView,

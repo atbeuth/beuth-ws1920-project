@@ -19,7 +19,7 @@ class Imagepost(models.Model):
     img_thumbnail = models.ImageField(upload_to='media/thumbnails', null=True, default='media/773433.jpg')
     description = models.TextField(max_length=100)
     long_description = models.TextField(max_length=1000)
-    freeuse = models.BooleanField(default=True) 
+    license_text = models.TextField(null=True)
     pinned = models.BooleanField(default=False) 
     category = models.CharField(max_length=30, choices=CATEGORY_CHOICES, default='green')
     tags = models.TextField(max_length=200)

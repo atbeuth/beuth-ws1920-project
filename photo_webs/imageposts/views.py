@@ -19,7 +19,7 @@ def image_resize_and_autorotate(imageFile, imageName):
     file_format = im.format
     exif = im._getexif()
 
-    im.thumbnail((1667, 1250), resample=Image.ANTIALIAS)
+    im.thumbnail((4096, 4096), resample=Image.ANTIALIAS)
 
     # if image has exif data about orientation, let's rotate it
     orientation_key = 274 # cf ExifTags
