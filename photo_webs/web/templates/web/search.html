@@ -1,5 +1,6 @@
 {% extends "web/home.html" %}
 {% load static %}
+{% load app_filters %}
 
 {% block intro %}
 <div class="card text-center mt-5 bg-dark" style="border-radius: 0;">
@@ -7,7 +8,13 @@
     background-repeat: no-repeat;
     background-position: center center;">
         <br>
-        <h1 class="text-light">{{pk}}</h1>
+        <h1 class="text-light">{{pk|title}}</h1>
+        {% if pk|get_search_description != none %}
+        <h2 class="text-light">{{ pk|get_search_description|dict_key:'text' }}</h2>
+        {% for btn in pk|get_search_description|dict_key:'suggestions'  %}
+        <a href="{% url 'web:search' pk=btn|title %}" class="btn btn-primary">{{btn|title}}</a>
+        {% endfor %}
+        {% endif %}
         <h2><a></a></h2>
     </div>
     <div class="card-footer text-dark bg-primary">
