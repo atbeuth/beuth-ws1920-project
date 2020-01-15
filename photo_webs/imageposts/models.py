@@ -12,6 +12,7 @@ CATEGORY_CHOICES = (
     ('wallpaper','WALLPAPER'),
 )
 
+
 class Imagepost(models.Model):
     title = models.TextField(max_length=15) 
     img = models.ImageField(upload_to='media', null=True, default='media/773433.jpg')

@@ -14,10 +14,33 @@ class ImagepostListView(ListView):
     context_object_name = "all_imgposts"
     template_name = 'web/home.html'
 
-    def get_context_data(self, **kwargs):
-        context = super(ImagepostListView, self).get_context_data(**kwargs) 
-        context['imgposts_list'] = Imagepost.objects.all()
-        return context
+def image_resize_and_autorotate(imageFile, imageName):
+    im = Image.open(imageFile)
+    file_format = im.format
+    exif = im._getexif()
+
+    im.thumbnail((4096, 4096), resample=Image.ANTIALIAS)
+
+    # if image has exif data about orientation, let's rotate it
+    orientation_key = 274 # cf ExifTags
+    if exif and orientation_key in exif:
+        orientation = exif[orientation_key]
+
+        rotate_values = {
+            3: Image.ROTATE_180,
+            6: Image.ROTATE_270,
+            8: Image.ROTATE_90
+        }
+
+        if orientation in rotate_values:
+            im = im.transpose(rotate_values[orientation])
+
+    im_io = BytesIO()
+    im.save(im_io, format='JPEG')
+    im_io.seek(0)
+
+    im_file = InMemoryUploadedFile(im_io, None, imageName, 'image/jpeg', sys.getsizeof(im_io), None)
+    return im_file
 
 def create_thumbnail(imageFile, imageName):
     im = Image.open(imageFile)
@@ -65,13 +88,17 @@ def create_thumbnail(imageFile, imageName):
     im_file = InMemoryUploadedFile(im_io, None, imageName, 'image/jpeg', sys.getsizeof(im_io), None)
     return im_file
 
+
 def add_post(request):
     if request.method == 'POST':
         form = ImagepostForm(request.POST, request.FILES)
         if form.is_valid():
             imagepost=form.save()
             imagepost.user=request.user
+
+            imagepost.img = image_resize_and_autorotate(form.cleaned_data['img'], imagepost.img.name)
             imagepost.img_thumbnail = create_thumbnail(form.cleaned_data['img'], imagepost.img.name)
+          
             imagepost.save()
             return redirect('/') 
     else:
