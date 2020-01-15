@@ -10,6 +10,7 @@
     {% load static %}
     <link rel="stylesheet" href="{% static "/css/style.css" %}">
     <script src="{% static "/js/btt.js"%}"></script>
+    <script src="{% static "/js/search.js" %}"></script>
     {% endblock head %}
 
     <!-- Bootstrap -->
@@ -78,10 +79,10 @@
                 <a class="btn btn-outline-primary mr-2" href="{% url 'login' %}" role="button">Log in</a>
                 <a class="btn btn-primary mr-2" href="{% url 'user:signup' %}" role="button">Sign up</a>
                 {% endif %}
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Discover PhotoHub"
+                <form class="form-inline my-2 my-lg-0" onsubmit="return search();">
+                    <input id="search_text" class="form-control mr-sm-2" placeholder="Discover PhotoHub"
                         aria-label="Search">
-                    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+                    <p id="search_button" class="btn btn-outline-primary my-2 my-sm-0" onclick="search()">Search</p>
                 </form>
             </div>
         </nav>
@@ -93,6 +94,7 @@
     {% block button_top %}<a class="btn btn-primary floating_button2" onclick="topFunction()" id="myBtn" href="#top">back to top</a>{% endblock button_top %}
     {% block button_upload %}<a class="btn btn-primary floating_button" href="{% url 'imageposts:add-post' %}" role="button">+ upload image</a>{% endblock button_upload %}
     {% endblock floating_nav %}
+
 </body>
 
 </html>

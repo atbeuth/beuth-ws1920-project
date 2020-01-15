@@ -1,0 +1,23 @@
+{% extends "web/home.html" %}
+{% load static %}
+
+{% block intro %}
+<div class="card text-center mt-5 bg-dark" style="border-radius: 0;">
+    <div class="card-body pt-5 pb-5" style="background-image: url({% static "media/default_page_banner.jpeg" %}); background-size: cover; 
+    background-repeat: no-repeat;
+    background-position: center center;">
+        <br>
+        <h1 class="text-light">{{pk}}</h1>
+        <h2><a></a></h2>
+    </div>
+    <div class="card-footer text-dark bg-primary">
+        {% if user.is_authenticated %}
+        Hello {{ user.username }}. Add new pictures to your <a href="{% url 'user:profile' %}{{ user.id }}"
+            class="text-light">profile</a>.
+        {% else %}
+        Discover the latest pictures.
+        {% endif %}
+    </div>
+</div>
+
+{% endblock intro %}

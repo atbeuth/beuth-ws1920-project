@@ -10,3 +10,6 @@ def license(request):
 
 def license_de(request):
     return render(request, 'web/license_de.html')
+
+def search(request, pk):
+    return render(request, 'web/search.html', {'pk':   pk})
