@@ -32,6 +32,7 @@
 {% block content %}
 <div class="gallery-big">
 {% for image in all_imgposts %}
+{% if pk|is_image_in_search:image == True %}
 
 <!-- big imagepost card -->
   <div class="card rounded-0 bg-dark card-border">
@@ -64,6 +65,7 @@
   </div>
   <!-- end of big imagepost card -->
 
+{% endif %}
 {% endfor %}
 </div>
 {% endblock content %}
