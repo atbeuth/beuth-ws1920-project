@@ -22,7 +22,7 @@ class Imagepost(models.Model):
     license_text = models.TextField(null=True)
     pinned = models.BooleanField(default=False) 
     category = models.CharField(max_length=30, choices=CATEGORY_CHOICES, default='green')
-    tags = models.TextField(max_length=200)
+    tags = models.TextField(null=True, max_length=200)
     username = models.TextField(max_length=50) 
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     timestamp = models.DateTimeField(auto_now=True) 
