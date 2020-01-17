@@ -36,3 +36,7 @@ def is_image_in_search(search, image):
         if (term.upper() in image.title.upper()) or (term.upper() in image.description.upper()) or (term.upper() in image.long_description.upper()) or (term.upper() in image.category.upper()) or (term.upper() in image.user.username.upper()):
             return True
     return False
+
+@register.filter(name='split_text')
+def split_text(text, split_on="\n"):
+    return text.split(split_on)

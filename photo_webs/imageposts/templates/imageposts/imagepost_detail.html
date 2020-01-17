@@ -1,0 +1,47 @@
+{% extends "web/base.html" %}
+{% load app_filters %}
+
+
+
+{% block content %}
+<div class="card-body bg-light mt-4" style="padding: 1.25rem;">
+    <div id="detail_card">
+      <img class="card-img-top mt-4" src="{{ image.img.url }}" alt="Card image cap">
+      <div class="card-body">
+        <h3 class="card-title text-center">{{image.title}}</h3>
+            <p class="card-text text-center">{{ image.long_description }}</p>
+        <br>
+        <a download="{{image.title}}", href="{{image.img.url}}" type="button" class="btn btn-outline-primary btn-block"><strong>Download Image - {{image.img.width}} x {{image.img.height}}</strong></a>
+        <br>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item  bg-light text-center">
+                <h5>Categorie </h5>{{ image.category }}
+            </li>
+            <li class="list-group-item  bg-light text-center">
+                <h5>Tags </h5>{% for tag in image.tags|split_text:", " %}<a href="{% url 'web:search' pk=tag|title %}"
+                    class="btn btn-primary m-2">{{tag|title}}</a>{% endfor %}
+            </li>
+            <li class="list-group-item  bg-light text-center">
+                <a href="{% url 'user:profile' %}{{image.user.id}}" class="text-white text-left">
+                    <div class="card bg-dark text-light">
+                        <div class="card-body">
+                            <img src="{{ image.user.profile.profile_img.url }}"
+                                class="rounded border border-primary float-left mr-3" style="width: 50px;"
+                                alt="Profile picture of {{ follower.username }}.">
+                            {{image.user}}
+                            <br>{{image.user.profile.bio_short}}
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <li class="list-group-item  bg-light">
+                <h5 class="text-center mt-3"><strong>License</strong></h5>
+                <br>{% for line in image.license_text|split_text %}<p>{{ line }}</p>{% endfor %}
+            </li>
+        </ul>
+          <div class="card-body">
+              </div>
+    </div>
+</div>
+</div>
+    {% endblock content %}

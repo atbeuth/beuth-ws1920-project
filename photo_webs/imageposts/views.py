@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.views.generic import ListView 
+from django.views.generic import ListView, DetailView
 from .models import Imagepost
 from .forms import ImagepostForm
 
@@ -8,6 +8,9 @@ from io import BytesIO
 from django.core.files.uploadedfile import InMemoryUploadedFile
 import sys
 
+class ImageDetailView(DetailView):
+    model = Imagepost
+    context_object_name = 'image'
 
 class ImagepostListView(ListView):
     model = Imagepost
@@ -88,6 +91,22 @@ def create_thumbnail(imageFile, imageName):
     im_file = InMemoryUploadedFile(im_io, None, imageName, 'image/jpeg', sys.getsizeof(im_io), None)
     return im_file
 
+PHOTOHUB_LICENSE = """PhotoHub license - use of images
+Images on PhotoHub are provided under the PhotoHub license under the following conditions.
+The PhotoHub license gives you an irrevocable, worldwide, non-exclusive and royalty-free right to use, download, copy and modify the images for commercial and non-commercial purposes. It is not necessary to name the photo author or PhotoHub, but we would be happy to provide a voluntary source.
+
+The PhotoHub license does not allow:
+
+- the sale or distribution of images in digital and physical form, in particular as stock photos or digital wallpapers;
+
+- the sale or distribution of images e.g. as posters, digital prints or physical products, without adding additional elements or otherwise creating added value;
+
+- depicting identifiable people in an offensive, pornographic, obscene, immoral, defamatory or political manner;
+
+- or the suggestion that depicted people, brands, organizations, etc. endorse certain products or services unless authorized to do so.
+
+Please note that although all content on PhotoHub is freely usable for commercial and non-commercial purposes, elements shown in the images, such as identifiable people, logos and brands, may be subject to additional copyrights, property rights, personal rights, trademark rights, etc. Third party approval or licensing of these rights may be required, particularly for commercial applications. PhotoHub does not guarantee that such consent or licenses have been obtained and expressly disclaims any liability in this regard.
+"""
 
 def add_post(request):
     if request.method == 'POST':
@@ -95,6 +114,10 @@ def add_post(request):
         if form.is_valid():
             imagepost=form.save()
             imagepost.user=request.user
+
+            if not form.cleaned_data['license_text'] :
+                imagepost.license_text = PHOTOHUB_LICENSE
+
 
             imagepost.img = image_resize_and_autorotate(form.cleaned_data['img'], imagepost.img.name)
             imagepost.img_thumbnail = create_thumbnail(form.cleaned_data['img'], imagepost.img.name)
