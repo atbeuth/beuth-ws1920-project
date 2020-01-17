@@ -1,0 +1,75 @@
+{% extends "web/base.html" %}
+
+{% block intro %}
+{% load static %}
+
+<div class="card text-center mt-5 bg-dark" style="border-radius: 0;">
+    <div class="card-body pt-5 pb-5" style="background-image: url({% static "media/default_page_banner.jpeg" %}); background-size: cover; 
+    background-repeat: no-repeat;
+    background-position: center center;">
+        <br>
+        <h1 class="text-light">Imprint and Terms of Service</h1>
+    </div>
+    <div class="card-footer text-dark bg-primary">
+        {% if user.is_authenticated %}
+        Hello {{ user.username }}. Add new pictures to your <a href="{% url 'user:profile' %}{{ user.id }}"
+            class="text-light">profile</a>.
+        {% else %}
+        Discover the latest pictures.
+        {% endif %}
+    </div>
+</div>
+
+{% endblock intro %}
+
+{% block content %}
+
+<article class="p-4">
+    <a href="{% url 'web:imprint_de' %}" class="text-light btn btn-primary">deutsch</a>
+    <a name="imprint"></a>
+    <h2 class="text-light mt-3">Imprint</h2>
+    <p class="text-light">Marc Störmer, Cem Saygili, Matti Schwartz, Duygu Köse,Serdar Korkmaz und Muharrem Yavuz</p>
+    <p class="text-light">Beuth University of Applied Sciences</p>
+    <p class="text-light"><strong>Adresse:</strong> Luxemburger Str.10 , 13353 Berlin</p>
+    <p class="text-light"><strong>Tel.: 030/4504021</strong></p>
+    <a name="terms"></a><br>
+    <h2 class="text-light mt-5"><strong>Terms of Service</strong></h2>
+    <section class="card border-info bg-dark p-4 mt-4">
+        <h2 class="text-light">License text</h2>
+        <p class="text-light">
+            <strong>PhotoHub</strong>
+            <br><br>
+            PhotoHub is a freely usable photo platform. Your use of the service and our provision of the service to you, constitutes an agreement by you and PhotoHub to be bound by the terms and conditions in these terms of Service.
+            <br>
+            Please read these Terms of service carefully. By signing up for or otherwise using the service, you are telling us that you have read, understood and agreed to be bound by these terms of service.
+            <br><br>
+            PhotoHub and/or its third-party licensors retain ownership of all intellectual property rights on this Website, the services and any software, mobile applications, web browser extensions and/or bookmarklets made available to you in connection with the services. However, we do not claim any ownership on the Content you or our other users Post.
+            <br><br>
+            <strong>General Terms</strong>
+            <br><br>
+            The service is designed for people who are at least 13 years old. If you are 13 or older, you promise to us that your use of the service won't break any laws or regulations. You are responsible for your use of our services. For any content you post, you're using the services and for any consequences or liability arising there from. As part of the services, you will be provided the opportunity to contribute inspirational content to the PhotoHub community. You can upload content from your device to our service. Please note that other users of the services can view all content.
+            <br><br>
+            You are solely responsible for your interaction with other users of the services, whether online or offline. We reserve the right but have no obligation to monitor or become involved in disputes between you and other users.
+            <br><br>
+            <strong>User posts and Third Party Content</strong>
+            <br><br>
+            We do not review new content prior to it being posted on our Website or through the Services. By Posting Content to our server, you guarantee us that you have the right to make this content available for use in accordance herewith. You further agree that the content you post to the services will not contain third-party copyrighted material, or material that is subject to other third-party rights (including rights relating to publicity and privacy), unless you have permission from the rightful owner of the material or you are otherwise legally entitled to post the material and to grant PhotoHub all license rights.
+            <br><br>
+            We do not guarantee, support or represent the completeness, reliability, veracity or accuracy of any content that appears on our website or the services. You understand that by using the services, you may be exposed to content, that you find offensive, inaccurate, otherwise inappropriate, deceptive or in some cases mislabeled. We expressly disclaim any liability for content.
+            <br><br>
+            <strong>Uploading content</strong>
+            <br><br>
+            By uploading images or videos to the site, you grant PhotoHub an irrevocable, worldwide, non-exclusive and royalty-free right to use, download or copy the content for commercial and non-commercial purposes free of charge.
+            <br><br>
+            You are responsible for your uploaded pictures and videos and guarantee, that
+            <br><br>
+            a. you own all rights to the content you upload on the site and that the content does not infringe copyright, proprietary rights, trademark law or other applicable rights of third parties,
+            <br><br>
+            b. you own and/or pass on all rights to the image that are necessary for worldwide, free, irrevocable and indefinite use, where required by law. This includes in particular valid model contracts, photography permits, as well as other licenses and rights of third parties.
+            <br><br>
+            Although PhotoHub strictly ensures that uploaded images are not misused or contrary to the terms of use, we cannot guarantee this and will not be held responsible in the current case.
+            <br><br>
+        </p>
+    </section>
+</article>
+{% endblock content %}

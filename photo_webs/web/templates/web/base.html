@@ -93,6 +93,12 @@
     {% block button_top %}<a class="btn btn-primary floating_button2" onclick="topFunction()" id="myBtn" href="#top">back to top</a>{% endblock button_top %}
     {% block button_upload %}<a class="btn btn-primary floating_button" href="{% url 'imageposts:add-post' %}" role="button">+ upload image</a>{% endblock button_upload %}
     {% endblock floating_nav %}
+    
+    <footer>
+        <a href="/" class="text-light">© 2019-2020 PhotoHub</a>
+        <a href="{% url 'web:imprint' %}#imprint"class="text-light">Imprint</a>
+        <a href="{% url 'web:imprint' %}#terms"class="text-light">Terms</a>
+    </footer>
 </body>
 
 </html>

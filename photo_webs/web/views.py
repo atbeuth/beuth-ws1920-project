@@ -10,3 +10,9 @@ def license(request):
 
 def license_de(request):
     return render(request, 'web/license_de.html')
+
+def imprint(request):
+    return render(request, 'web/terms.html')
+
+def imprint_de(request):
+    return render(request, 'web/terms_de.html')
