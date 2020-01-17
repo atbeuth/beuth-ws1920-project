@@ -12,14 +12,13 @@ CATEGORY_CHOICES = (
     ('wallpaper','WALLPAPER'),
 )
 
-
 class Imagepost(models.Model):
-    title = models.TextField(max_length=15) 
+    title = models.TextField(max_length=30) 
     img = models.ImageField(upload_to='media', null=True, default='media/773433.jpg')
     img_thumbnail = models.ImageField(upload_to='media/thumbnails', null=True, default='media/773433.jpg')
     description = models.TextField(max_length=100)
     long_description = models.TextField(max_length=1000)
-    license_text = models.TextField(null=True)
+    license_text = models.TextField(max_length=5000, blank=True, null=True)
     pinned = models.BooleanField(default=False) 
     category = models.CharField(max_length=30, choices=CATEGORY_CHOICES, default='green')
     tags = models.TextField(null=True, max_length=200)

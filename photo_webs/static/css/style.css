@@ -237,6 +237,10 @@ footer a:nth-of-type(even) {
     -webkit-box-shadow: 0px 5px 30px -5px black;
             box-shadow: 0px 5px 30px -5px black;
   }
+  #detail_card {
+    width: 55%;
+    margin: auto;
+  }
 }
 
 /* form styles */

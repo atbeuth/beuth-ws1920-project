@@ -4,40 +4,45 @@
 {% load static %}
 
 <div class="card text-center mt-5 bg-dark" style="border-radius: 0;">
-    <div class="card-body pt-5 pb-5" style="background-image: url({% static "media/default_page_banner.jpeg" %}); background-size: cover; 
+  <div class="card-body pt-5 pb-5" style="background-image: url({% static "media/default_page_banner.jpeg" %}); background-size: cover; 
     background-repeat: no-repeat;
     background-position: center center;">
     <br>
-      <h4 class="card-title text-danger"><strong>Awesome & free pictures</strong></h4>
-      <h5 class="card-text text-light"><strong>Free pictures from our talented community combined with a simple license</strong></h5>
-      <br>
-      <a href="{% url 'web:search' pk='wallpaper'|title %}" class="btn btn-primary">Wallpapers</a><a href="{% url 'web:search' pk='nature'|title %}" class="btn btn-primary ml-2 mr-2">Nature</a><a href="{% url 'web:search' pk='free to use'|title %}" class="btn btn-primary">Free to use</a>
-      <br><br>
-    </div>
-    <div class="card-footer text-dark bg-primary">
-      {% if user.is_authenticated %}
-        Hello {{ user.username }}. Add new pictures to your <a href="{% url 'user:profile' %}{{ user.id }}" class="text-light">profile</a>.
-      {% else %}
-      Discover the latest pictures.
-      {% endif %}
-    </div>
+    <h4 class="card-title text-danger"><strong>Awesome & free pictures</strong></h4>
+    <h5 class="card-text text-light"><strong>Free pictures from our talented community combined with a simple
+        license</strong></h5>
+    <br>
+    <a href="{% url 'web:search' pk='wallpaper'|title %}" class="btn btn-primary">Wallpapers</a><a
+      href="{% url 'web:search' pk='nature'|title %}" class="btn btn-primary ml-2 mr-2">Nature</a><a
+      href="{% url 'web:search' pk='free to use'|title %}" class="btn btn-primary">Free to use</a>
+    <br><br>
   </div>
+  <div class="card-footer text-dark bg-primary">
+    {% if user.is_authenticated %}
+    Hello {{ user.username }}. Add new pictures to your <a href="{% url 'user:profile' %}{{ user.id }}"
+      class="text-light">profile</a>.
+    {% else %}
+    Discover the latest pictures.
+    {% endif %}
+  </div>
+</div>
 {% endblock intro %}
 
 {% block content %}
 <div class="gallery-big">
-{% for image in all_imgposts reversed%}
+  {% for image in all_imgposts reversed%}
 
-<!-- big imagepost card -->
+  <!-- big imagepost card -->
   <div class="card rounded-0 bg-dark card-border">
     <div class="card-header text-light">
-    <a href="{% url 'user:profile' %}{{image.user.id}}" class="text-white">
-      <img src="{{ image.user.profile.profile_img.url }}" class="rounded border border-primary float-left mr-3 profile-images-mini"
-      alt="Profile picture of {{ user.username }}.">
-      {{ image.user.username }}
-      {% if image.user.is_staff %}<span class="badge badge-secondary">PhotoHub-Team</span> {% endif %}
-      {% if image.user.profile.is_verified %}<span class="badge badge-info">verified</span> {% endif %}
-      {% if image.user.profile.is_pro %}<span class="badge badge-light">PRO</span> {% endif %}
+      <a href="{% url 'user:profile' %}{{image.user.id}}" class="text-white">
+        <img src="{{ image.user.profile.profile_img.url }}"
+          class="rounded border border-primary float-left mr-3 profile-images-mini"
+          alt="Profile picture of {{ user.username }}.">
+        {{ image.user.username }}
+        {% if image.user.is_staff %}<span class="badge badge-secondary">PhotoHub-Team</span> {% endif %}
+        {% if image.user.profile.is_verified %}<span class="badge badge-info">verified</span> {% endif %}
+        {% if image.user.profile.is_pro %}<span class="badge badge-light">PRO</span> {% endif %}
       </a>
     </div>
     <figure class="gallery_item-big m-0 p-0">
@@ -46,6 +51,7 @@
         <div class="text">
           <h3 class="text-danger">{{ image.title }}</h3>
           <p>{{ image.description }}</p>
+          <a href="{% url 'imageposts:show' pk=image.id %}" class="btn btn-outline-warning"><strong>Open</strong></a>
         </div>
       </div>
     </figure>
@@ -59,6 +65,6 @@
   </div>
   <!-- end of big imagepost card -->
 
-{% endfor %}
+  {% endfor %}
 </div>
 {% endblock content %}
