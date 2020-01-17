@@ -19,8 +19,10 @@ class ImagepostListView(ListView):
 
 def image_resize_and_autorotate(imageFile, imageName):
     im = Image.open(imageFile)
-    file_format = im.format
     exif = im._getexif()
+
+    if im.mode in ("RGBA", "P"):
+        im = im.convert("RGB")
 
     im.thumbnail((4096, 4096), resample=Image.ANTIALIAS)
 
@@ -81,6 +83,9 @@ def create_thumbnail(imageFile, imageName):
             bottom = top + new_height
 
     cropped_im = im.crop((left, top, right, bottom))
+
+    if cropped_im.mode in ("RGBA", "P"):
+        cropped_im = cropped_im.convert("RGB")
 
     # save image to object
     im_io = BytesIO()

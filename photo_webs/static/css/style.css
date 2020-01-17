@@ -266,3 +266,7 @@ footer a:nth-of-type(even) {
   width: 400px;
   height: 40px;
 }
+
+#id_license_text {
+  height: 400px;
+}
