@@ -92,7 +92,7 @@
     {% block content %} {% endblock content %}
     {% block floating_nav %}
     {% block button_top %}<a class="btn btn-primary floating_button2" onclick="topFunction()" id="myBtn" href="#top">back to top</a>{% endblock button_top %}
-    {% block button_upload %}<a class="btn btn-primary floating_button" href="{% url 'imageposts:add-post' %}" role="button">+ upload image</a>{% endblock button_upload %}
+    {% block button_upload %}{% if user.is_authenticated %}<a class="btn btn-primary floating_button" href="{% url 'imageposts:add-post' %}" role="button">+ upload image</a>{% endif %}{% endblock button_upload %}
     {% endblock floating_nav %}
     
     <footer>
