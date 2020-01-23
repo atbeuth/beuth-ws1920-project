@@ -15,6 +15,7 @@ class ImageDetailView(DetailView):
 class ImagepostListView(ListView):
     model = Imagepost
     context_object_name = "all_imgposts"
+    paginate_by = 24
     template_name = 'web/home.html'
 
 def image_resize_and_autorotate(imageFile, imageName):

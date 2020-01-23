@@ -40,3 +40,14 @@ def is_image_in_search(search, image):
 @register.filter(name='split_text')
 def split_text(text, split_on="\n"):
     return text.split(split_on)
+
+@register.filter(name='int_to_list_string')
+def int_to_list_string(num):
+    int_string = ''
+    for count in range(1, num + 1):
+            int_string += str(count)
+    return int_string
+
+@register.filter(name='to_string')
+def to_string(num):
+    return str(num)

@@ -2,6 +2,8 @@
 
 {% block intro %}
 {% load static %}
+<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
+{% load app_filters %}
 
 <div class="card text-center mt-5 bg-dark" style="border-radius: 0;">
   <div class="card-body pt-5 pb-5" style="background-image: url({% static "media/default_page_banner.jpeg" %}); background-size: cover; 
@@ -30,7 +32,7 @@
 
 {% block content %}
 <div class="gallery-big">
-  {% for image in all_imgposts reversed%}
+  {% for image in page_obj reversed%}
 
   <!-- big imagepost card -->
   <div class="card rounded-0 bg-dark card-border">
@@ -62,9 +64,31 @@
       {% endif %}
       <a class="text-primary float-right mr-1">{{ image.category }}</a>
     </div>
+
   </div>
   <!-- end of big imagepost card -->
 
   {% endfor %}
 </div>
+ <!-- paginator -->
+ <nav aria-label="pagination">
+  <ul class="pagination justify-content-center pagination-lg">
+    {% for count in page_obj.paginator.num_pages|int_to_list_string %}
+      {% if count == '1' %}
+      <li id="page-item" class="page-item"><a href="?page={{count}}" class="page-link text-primary">first</a></li>
+      {% elif count == page_obj.paginator.num_pages|to_string %}
+      <li id="page-item" class="page-item"><a href="?page={{count}}" class="page-link text-primary">last</a></li>
+      {% elif count == page_obj.previous_page_number|to_string %}
+      <li id="page-item" class="page-item"><a href="?page={{count}}" class="page-link text-primary">previous</a></li>
+      {% elif count == page_obj.next_page_number|to_string %}
+      <li id="page-item" class="page-item"><a href="?page={{count}}" class="page-link text-primary">next</a></li>
+      {% elif count == page_obj.number|to_string %}
+      <li id="page-item" class="page-item b"><a href="?page={{count}}" class="page-link text-primary"><strong>{{ count }}</strong></a></li>
+      {% else %}
+      <li id="page-item" class="page-item"><a href="?page={{count}}" class="page-link text-primary">{{ count }}</a></li>
+      {% endif %}
+      {% endfor %}
+  </ul>
+</nav>
+<!-- /paginator -->
 {% endblock content %}
