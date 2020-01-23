@@ -12,6 +12,9 @@
             <p class="card-text text-center">{{ image.long_description }}</p>
         <br>
         <a download="{{image.title}}", href="{{image.img.url}}" type="button" class="btn btn-outline-primary btn-block"><strong>Download Image - {{image.img.width}} x {{image.img.height}}</strong></a>
+        {% if image.user == user %}
+        <a href="{% url 'imageposts:edit' pk=image.id %}" type="button" class="btn btn-outline-danger btn-block"><strong>Edit Image</strong></a>
+        {% endif %}
         <br>
           <ul class="list-group list-group-flush">
             <li class="list-group-item  bg-light text-center">

@@ -71,7 +71,7 @@
                     </button>
                     <div class="dropdown-menu"">
                               <a href="{% url 'user:profile' %}{{ user.id }}" class="dropdown-item">My profile</a>
-                        <a href="#" class="dropdown-item">Settings</a>
+                              <a href="{% url 'user:user-settings' %}" class="dropdown-item">Settings</a>
                         <div class="dropdown-divider"></div>
                         <a href="{% url 'logout' %}" class="dropdown-item">Not {{ user.username }}? Log out</a>
                     </div>

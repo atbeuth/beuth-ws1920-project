@@ -32,41 +32,9 @@
 
 {% block content %}
 <div class="gallery-big">
-  {% for image in page_obj reversed%}
+  {% for image in page_obj reversed %}
 
-  <!-- big imagepost card -->
-  <div class="card rounded-0 bg-dark card-border">
-    <div class="card-header text-light">
-      <a href="{% url 'user:profile' %}{{image.user.id}}" class="text-white">
-        <img src="{{ image.user.profile.profile_img.url }}"
-          class="rounded border border-primary float-left mr-3 profile-images-mini"
-          alt="Profile picture of {{ user.username }}.">
-        {{ image.user.username }}
-        {% if image.user.is_staff %}<span class="badge badge-secondary">PhotoHub-Team</span> {% endif %}
-        {% if image.user.profile.is_verified %}<span class="badge badge-info">verified</span> {% endif %}
-        {% if image.user.profile.is_pro %}<span class="badge badge-light">PRO</span> {% endif %}
-      </a>
-    </div>
-    <figure class="gallery_item-big m-0 p-0">
-      <img src="{{ image.img_thumbnail.url }}" class="gallery_img" alt="{{ image.description }}">
-      <div class="overlay-big">
-        <div class="text">
-          <h3 class="text-danger">{{ image.title }}</h3>
-          <p>{{ image.description }}</p>
-          <a href="{% url 'imageposts:show' pk=image.id %}" class="btn btn-outline-warning"><strong>Open</strong></a>
-        </div>
-      </div>
-    </figure>
-    <div class="card-footer text-light">
-      {{ image.timestamp }}
-      {% if image.freeuse%}
-      <a class="text-primary float-right ">- free to use</a>
-      {% endif %}
-      <a class="text-primary float-right mr-1">{{ image.category }}</a>
-    </div>
-
-  </div>
-  <!-- end of big imagepost card -->
+  {% include 'imageposts/snippet/img_card.html' with image=image user=user %}
 
   {% endfor %}
 </div>
