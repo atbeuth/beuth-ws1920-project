@@ -46,16 +46,9 @@
 <div class="gallery">
 {% for image in imagepost_list %}
 {% if image.user == user_p %}
- <figure class="gallery_item">
-    <img src="{{ image.img_thumbnail.url }}" class="gallery_img" alt="Image 1">
-    <div class="overlay">
-      <div class="text text-danger">{{ image.title }}</div>
-      <a class="text text-primary mt-4">{{ image.category }}</a>
-      {% if image.freeuse %}
-      <a class="text text-primary mt-5">free to use</a>
-      {% endif %}
-    </div>
-  </figure>
+
+{% include 'imageposts/snippet/img_card_mini.html' with image=image user=user_p %}
+
 {% endif %}
 {% endfor %}
 </div>

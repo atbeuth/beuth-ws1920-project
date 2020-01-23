@@ -1,0 +1,19 @@
+{% extends "web/base.html" %}
+{% load bootstrap4 %}
+
+{% block content %}
+<div class="card m-5">
+  <h5 class="card-header">Edit Imagepost</h5>
+  <div class="card-body">
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <!--{{ form.as_p }}-->
+      {% bootstrap_form form %}
+      <p>
+      <a href="/imageposts/post/{{pk}}">View on Website</a>
+      </p>
+      <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+  </div>
+</div>
+{% endblock content %}
