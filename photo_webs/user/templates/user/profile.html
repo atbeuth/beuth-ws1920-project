@@ -1,0 +1,56 @@
+{% extends "web/base.html" %}
+{% load static %}
+
+{% block intro %}
+<div class="card text-center mt-5 bg-dark" style="border-radius: 0;">
+  <div class="card-body" style="background-image: url({{ user_p.profile.profile_banner.url }}); background-size: cover;                      /* <------ */
+    background-repeat: no-repeat;
+    background-position: center center;">
+    
+    <img src="{{user_p.profile.profile_img.url}} " class="img-thumbnail" alt="">
+    
+  </div>
+  <div class="card-body bg-dark p-4">
+    <h5 class="card-title text-danger ">{{ user_p.username }} {% if user_p.is_staff %}<span class="badge badge-secondary">PhotoHub-Team</span> {% endif %}{% if user_p.profile.is_verified %}<span class="badge badge-info">verified</span> {% endif %}{% if user_p.profile.is_pro %}<span class="badge badge-light">PRO</span> {% endif %}</h5>
+    
+    {% block follow %}
+    {% if user.is_authenticated and user != user_p %}
+    <p>{% include 'user/snippet/follow_form.html' with username=user_p.username is_following=is_following %}</p>
+    {% endif %}
+    {% endblock follow %}
+    
+    <p class="card-text text-light">{{ user_p.profile.bio_short }}</p>
+    {% if user_p.profile.show_email and user_p.email%}
+    <a href="mailto:{{ user_p.email }}?subject=PhotoHub" class="card-text text-primary">Email: {{ user_p.email }}</a>
+    {% endif%}
+
+    {% if user_p.profile.show_location and user_p.profile.location%}
+    <p class="card-text text-primary">Location: {{ user_p.profile.location }}</p>
+    {% endif%}
+    </div>
+
+  <div class="card-footer text-muted bg-primary">
+    {% block nav1 %}<a href="#" class="text-light pr-2 pl-2">Overview</a>{% endblock nav1 %}
+    {% if user.is_authenticated and user == user_p%}
+    {% block nav2 %}<a href="/user/profile/settings" class="text-dark pr-2 pl-2">Edit Info</a>{% endblock nav2 %}
+    {% else %}
+    {% block nav3 %}<a href="#" class="text-dark pr-2 pl-2">Bio</a>{% endblock nav3 %}
+    {% endif%}
+    {% block nav4 %}<a href="images" class="text-dark pr-2 pl-2">Images</a>{% endblock nav4 %}
+    {% block nav5 %}<a href="/user/{{ user_p.id }}/followers" class="text-dark pr-2 pl-2">Following</a>{% endblock nav5 %}
+  </div>
+</div>
+{% endblock intro %}
+
+{% block content %}
+<div class="gallery">
+{% for image in imagepost_list %}
+{% if image.user == user_p %}
+
+{% include 'imageposts/snippet/img_card_mini.html' with image=image user=user_p %}
+
+{% endif %}
+{% endfor %}
+</div>
+
+{% endblock content %}

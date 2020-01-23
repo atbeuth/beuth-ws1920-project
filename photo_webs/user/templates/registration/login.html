@@ -1,0 +1,42 @@
+{% extends "web/base.html" %}
+{% load bootstrap4 %}
+
+{% block content %}
+<div class="card m-5">
+  <h5 class="card-header">Log in</h5>
+
+  <!-- log out alert -->
+  {% if request.GET.lgo_alert %}
+  <div class="alert alert-success alert-dismissible fade show m-3" role="alert">
+    <strong>Success!</strong> You have been logged out.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% endif %}
+
+  <!-- sign in alert -->
+  {% if request.GET.sgu_alert %}
+  <div class="alert alert-success alert-dismissible fade show m-3" role="alert">
+    <strong>Success!</strong> Your account has been created.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% endif %}
+
+  <div class="card-body">
+    <form method="post">
+      {% csrf_token %}
+      <!--{{ form.as_p }}-->
+      {% bootstrap_form form %}
+      <button class="btn btn-primary" type="submit">Login</button>
+    </form>
+    <p class="text-muted mt-3">
+      You do not have an account? <a href="{% url 'user:signup' %}" class="text-decoration-none">Sign up</a> now and discover PhotoHub.</p>
+    </p>
+  </div>
+</div>
+{% endblock content %}
+
+{% block floating_nav %}{% endblock floating_nav %}

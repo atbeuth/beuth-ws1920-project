@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    {% block head %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static "/css/style.css" %}">
+    <link rel="stylesheet" href="{% static "/fonts/css/line-awesome.min.css" %}">
+    <script src="{% static "/js/btt.js"%}"></script>
+    <script src="{% static "/js/search.js" %}"></script>
+    {% endblock head %}
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <title>PhotoHub - {% block title %} Home {% endblock title %}</title>
+</head>
+
+<body class="bg-dark" name="top">
+    <header>
+
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!-- logo and name -->
+            <a class="navbar-brand" href="/">
+                {% load static %}
+                <img src="{% static "icons/logo_photohub_red.png" %}" width="30" height="30"
+                    class="d-inline-block align-top" alt="">
+                PhotoHub
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'web:license' %}">The PhotoHub license</a>
+                    </li>
+                    {% if user.is_staff %}
+                    <li class="nav-item">
+                            <a class="nav-link text-warning" href="/admin">/admin</a>
+                    </li>
+                    {% endif %}
+                </ul>
+
+                
+
+                <!-- user dropdown or login buttons-->
+                {% if user.is_authenticated %}
+                <div class="btn-group mr-2">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        {{ user.username }}
+                    </button>
+                    <div class="dropdown-menu"">
+                              <a href="{% url 'user:profile' %}{{ user.id }}" class="dropdown-item">My profile</a>
+                              <a href="{% url 'user:user-settings' %}" class="dropdown-item">Settings</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="{% url 'logout' %}" class="dropdown-item">Not {{ user.username }}? Log out</a>
+                    </div>
+                </div>
+                {% else %}
+                <a class="btn btn-outline-primary mr-2" href="{% url 'login' %}" role="button">Log in</a>
+                <a class="btn btn-primary mr-2" href="{% url 'user:signup' %}" role="button">Sign up</a>
+                {% endif %}
+                <form class="form-inline my-2 my-lg-0" onsubmit="return search();">
+                    <input id="search_text" class="form-control mr-sm-2" placeholder="Discover PhotoHub"
+                        aria-label="Search">
+                    <p id="search_button" class="btn btn-outline-primary my-2 my-sm-0" onclick="search()">Search</p>
+                </form>
+            </div>
+        </nav>
+    </header>
+
+    {% block intro %} {% endblock intro %}
+    {% block content %} {% endblock content %}
+    {% block floating_nav %}
+    {% block button_top %}<a id="back-top-btn-round" class="btn btn-primary floating_button2" onclick="topFunction()" href="#top"><i id="back-top-btn" class="las la-arrow-circle-up"></i></a>{% endblock button_top %}
+    {% block button_upload %}{% if user.is_authenticated %}<a id="upload-btn-sm" class="btn btn-primary floating_button" href="{% url 'imageposts:add-post' %}" role="button"><i id="upload-btn" class="las la-camera-retro"></i></a>{% endif %}{% endblock button_upload %}
+    {% endblock floating_nav %}
+    
+    <footer>
+        <a href="/" class="text-light">© 2019-2020 PhotoHub</a>
+        <a href="{% url 'web:imprint' %}#imprint"class="text-light">Imprint</a>
+        <a href="{% url 'web:imprint' %}#terms"class="text-light">Terms</a>
+    </footer>
+
+</body>
+
+</html>

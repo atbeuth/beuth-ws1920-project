@@ -1,0 +1,13 @@
+<!-- mini imagepost card -->
+<figure class="gallery_item">
+    <img src="{{ image.img_thumbnail.url }}" class="gallery_img" alt="Image 1">
+    <div class="overlay">
+        <div class="text text-danger">{{ image.title }}</div>
+        <a class="text text-primary mt-4">{{ image.category }}</a>
+        <a href="{% url 'imageposts:show' pk=image.id %}" class="mt-4 btn btn-outline-warning"><strong>Open</strong></a>
+        {% if image.freeuse %}
+        <a class="text text-primary mt-5">free to use</a>
+        {% endif %}
+    </div>
+</figure>
+<!-- /mini imagepost card -->

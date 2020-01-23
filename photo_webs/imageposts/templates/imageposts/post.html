@@ -1,0 +1,18 @@
+{% extends "web/base.html" %}
+{% load bootstrap4 %}
+
+{% block content %}
+<div class="card m-5">
+    <h5 class="card-header">Upload image</h5>  
+
+  <div class="card-body">
+      <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          {% bootstrap_form form %}
+        <button class="btn btn-primary" type="submit">upload</button>
+      </form>
+    </div>
+    </div>
+    
+{% endblock content %}
+{% block button_upload %}{% endblock button_upload %}

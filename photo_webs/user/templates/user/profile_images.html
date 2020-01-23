@@ -1,0 +1,43 @@
+{% extends "user/profile.html" %} {% load static %}
+{% block nav1 %}<a href="/user/{{ user_p.id }}" class="text-dark pr-2 pl-2">Overview</a>{% endblock nav1 %}
+{% block nav2 %}<a href="/user/profile/settings/" class="text-dark pr-2 pl-2">Edit Info</a>{% endblock nav2 %}
+{% block nav3 %}<a href="#" class="text-dark pr-2 pl-2">Bio</a>{% endblock nav3 %}
+{% block nav4 %}<a href="#" class="text-light pr-2 pl-2">Images</a>{% endblock nav4 %}
+{% block nav5 %}<a href="/user/{{ user_p.id }}/followers" class="text-dark pr-2 pl-2">Following</a>{% endblock nav5 %}
+{% load app_filters %}
+
+{% block content %}
+
+<div class="card bg-dark" style="width: 100%;">
+    <div class="card-body">
+        <h5 class="card-title text-light">Pinned</h5>
+        <h6 class="card-subtitle mb-2 text-muted">The photographer pinned these works</h6>
+    </div>
+</div>
+
+<div class="gallery-big">
+    {% for image in imagepost_list reversed %}
+    {% if image.user == user_p and image.pinned %}
+
+    {% include 'imageposts/snippet/img_card_mini.html' with image=image user=user_p %}
+
+    {% endif %} {% endfor %}
+</div>
+
+<div class="card bg-dark" style="width: 100%;">
+    <div class="card-body">
+        <h5 class="card-title text-light">Licensed pictures</h5>
+        <h6 class="card-subtitle mb-2 text-muted">These pictures were provided under special licenses. Read these carefully to know how to use the pictures</h6>
+    </div>
+</div>
+</div>
+
+<div class="gallery-big">
+    {% for image in imagepost_list reversed %} {% if image.user == user_p and not image.freeuse %}
+
+    {% include 'imageposts/snippet/img_card.html' with image=image user=user_p %}
+
+    {% endif %} {% endfor %}
+    
+</div>
+{% endblock content %}

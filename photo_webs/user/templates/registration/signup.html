@@ -1,0 +1,32 @@
+{% extends "web/base.html" %}
+{% load bootstrap4 %}
+
+{% block content %}
+<div class="card m-5">
+  <h5 class="card-header">Sign up</h5>
+
+  <!-- log out alert -->
+  {% if request.GET.lgo_alert %}
+  <div class="alert alert-success alert-dismissible fade show m-3" role="alert">
+    <strong>Success!</strong> You have been logged out.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% endif %}
+
+  <div class="card-body">
+    <form method="post">
+      {% csrf_token %}
+      <!--{{ form.as_p }}-->
+      {% bootstrap_form form %}
+      <button class="btn btn-primary" type="submit">Sign up</button>
+    </form>
+    <p class="text-muted mt-3">
+        You already have an account? <a href="{% url 'login' %}" class="text-decoration-none">Log in</a> instead.</p>
+    </p>
+  </div>
+</div>
+{% endblock content %}
+
+{% block floating_nav %}{% endblock floating_nav %}

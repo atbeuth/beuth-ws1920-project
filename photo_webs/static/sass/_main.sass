@@ -1,0 +1,258 @@
+/*main style*/
+@import variables
+*
+    margin: 0
+    padding: 0
+    scroll-behavior: smooth
+
+.image-card 
+    position: relative
+    color: white
+    text-shadow: 0 0 10px black
+
+
+.image-card-title 
+    position: absolute
+    top: 20px
+    left: 20px
+    font-size: 15pt
+
+
+.image-card-username 
+    position: absolute
+    top: 60px
+    left: 20px
+    font-size: 10pt
+
+
+.image-card-timestamp 
+    position: absolute
+    top: 42px
+    left: 20px
+    font-size: 10pt
+
+
+.image-card-freeuse 
+    position: absolute
+    top: 28px
+    right: 20px
+
+
+.image-card-img 
+    max-width: 100%
+    height: auto
+
+
+.image-card-description 
+    position: absolute
+    bottom: 25px
+    left: 20px
+    right: 20px
+    font-size: 10pt
+
+
+.image-card-tags 
+    position: absolute
+    bottom: 1px
+    left: 20px
+    font-size: 10pt
+
+
+.floating_button 
+    position: fixed
+    bottom: 30px
+    right: 20px
+
+.floating_button2 
+    position: fixed
+    bottom: 80px
+    right: 20px
+
+/* images grid */
+.gallery 
+    display: grid
+    grid-template-columns: repeat(2, 1fr)
+    background: rgb(36, 36, 38)
+
+.gallery-big 
+    padding: 5px 0
+    display: grid
+    grid-template-columns: repeat(1, 1fr)
+    row-gap: 5px
+    background: rgb(36, 36, 38)
+
+.gallery_img 
+    width: 100%
+    height: 100%
+    display: block
+
+
+.gallery_item 
+    height: 100%
+    background: black
+    border: solid 1px black
+    position: relative
+
+
+.gallery_item-big  
+    height: 100%
+    position: relative
+
+
+.overlay 
+    position: absolute
+    bottom: 0
+    left: 0
+    right: 0
+    background-color: rgba(0, 0, 0, .5)
+    overflow: hidden
+    width: 100%
+    height: 0
+    transition: $transition_default
+    text-align: center
+
+
+.overlay-big 
+    position: absolute
+    bottom: 0
+    left: 0
+    right: 0
+    background-color: rgba(0, 0, 0, .5)
+    overflow: hidden
+    width: 100%
+    height: 0
+    transition: $transition_default
+  
+.gallery_item:hover .overlay 
+    height: 100%
+  
+.gallery_item-big:hover .overlay-big 
+    height: 100%
+  
+.gallery-big:hover .overlay 
+    height: 100%
+  
+.text 
+    white-space: nowrap
+    color: white
+    font-size: 20px
+    position: absolute
+    overflow: hidden
+    text-align: center
+    @include center
+
+.text-freeuse 
+    top: -10%
+    left: 80%
+
+.card-overlay 
+    color: white
+    position: fixed
+     /* Sit on top of the page content */
+    display: block
+     /* Hidden by default */
+    width: 100%
+     /* Full width (cover the whole page) */
+    height: 100%
+     /* Full height (cover the whole page) */
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    background-color: rgba(0,0,0,1)
+     /* Black background with opacity */
+    z-index: 10
+     /* Specify a stack order in case you're using a different order for other elements */
+    cursor: pointer
+     /* Add a pointer on hover */
+
+.img-thumbnail 
+    box-shadow: 0px 5px 30px -5px rgb(0, 0, 0)
+    width: 200px !important
+    height: 200px !important
+
+
+.profile-images-mini 
+    width: 25px
+    height: 25px
+
+
+.mini-cards 
+    padding: $padding_default
+
+#back-top-btn
+    font-size: 32px
+
+#upload-btn
+    font-size: 32px
+
+#upload-btn-sm
+    padding-left: 10px
+    padding-top: 3px
+    padding-bottom: 3px
+    padding-right: 10px
+
+#back-top-btn-round
+    display: none
+    padding-left: 10px
+    padding-top: 3px
+    padding-bottom: 3px
+    padding-right: 10px
+
+footer
+    padding: $padding_default
+    a:nth-of-type(even)
+        margin: 0 $padding_default
+
+.pagination
+        margin: auto
+        padding-top: $padding_default
+        justify-content: $content_center
+        padding-bottom: $padding_default
+        background: #242426
+        a
+            background: #333a40
+            box-shadow: 0px 5px 30px -5px rgb(0, 0, 0)
+            padding: 2px
+
+#page-item
+    
+
+/* media query for desktop */
+@media (min-width:1025px) 
+    .gallery .gallery_item 
+        box-shadow: 0px 5px 30px -5px rgb(0, 0, 0)
+
+    .gallery-big 
+        grid-template-columns: repeat(4, 1fr)
+        gap: 20px
+        padding: $padding_default
+
+    
+
+    .gallery 
+        display: grid
+        grid-template-columns: repeat(5, 1fr)
+        padding: $padding_default
+    
+
+    .card 
+        box-shadow: 0px 5px 30px -5px rgb(0, 0, 0)
+
+    #detail_card
+        width: 55%
+        margin: auto
+
+    .pagination
+        margin: auto
+        padding-top: $padding_default
+        justify-content: $content_center
+        padding-bottom: $padding_default
+        background: #242426
+        a
+            background: #333a40
+            box-shadow: 0px 5px 30px -5px rgb(0, 0, 0)
+            padding-top: 8px !important
+            padding-left: 20px !important
+            padding-right: 20px !important
+            padding-bottom: 8px !important
