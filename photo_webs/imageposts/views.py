@@ -8,6 +8,8 @@ from io import BytesIO
 from django.core.files.uploadedfile import InMemoryUploadedFile
 import sys
 
+from django.shortcuts import get_object_or_404
+
 class ImageDetailView(DetailView):
     model = Imagepost
     context_object_name = 'image'
@@ -127,3 +129,19 @@ def add_post(request):
     else:
         form = ImagepostForm()
     return render(request, 'imageposts/post.html', {'form': form})
+
+
+def edit_post(request, pk):
+    post = get_object_or_404(Imagepost, pk=pk)
+    if request.method == "POST":
+        form = ImagepostForm(request.POST, request.FILES, instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+            return redirect('/imageposts/post/{}/edit/'.format(pk), pk=pk)
+    else:
+        if (request.user != post.user):
+            return redirect('/imageposts/post/{}/'.format(pk), pk=pk)
+        else:
+            form = ImagepostForm(instance=post)
+            return render(request, 'imageposts/edit_imagepost.html', {'form': form, 'pk': pk})
