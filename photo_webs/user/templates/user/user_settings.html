@@ -37,14 +37,15 @@
 
 {% block content %}
 <div class="card m-5">
-  <h5 class="card-header">Profile Settings</h5>
+  <h5 class="card-header">User Settings</h5>
   <div class="card-body">
     <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
       <!--{{ form.as_p }}-->
       {% bootstrap_form form %}
       <p>
-      <a href="/user/settings/">Or change your account informations...</a>
+      <a href="/user/settings/password">Change password...</a><br>
+      <a href="/user/profile/settings/">Or change your profile appearance...</a>
       </p>
       <button class="btn btn-primary" type="submit">Submit</button>
     </form>
