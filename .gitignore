@@ -8,3 +8,4 @@ db.sqlite3
 secret_settings.py
 uploaded_content/
 env
+fonts/

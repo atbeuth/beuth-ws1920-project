@@ -4,6 +4,7 @@
 {% block nav3 %}<a href="#" class="text-dark pr-2 pl-2">Bio</a>{% endblock nav3 %}
 {% block nav4 %}<a href="#" class="text-light pr-2 pl-2">Images</a>{% endblock nav4 %}
 {% block nav5 %}<a href="/user/{{ user_p.id }}/followers" class="text-dark pr-2 pl-2">Following</a>{% endblock nav5 %}
+{% load app_filters %}
 
 {% block content %}
 
@@ -37,6 +38,6 @@
     {% include 'imageposts/snippet/img_card.html' with image=image user=user_p %}
 
     {% endif %} {% endfor %}
+    
 </div>
-
 {% endblock content %}
