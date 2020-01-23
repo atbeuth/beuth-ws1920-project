@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 
@@ -14,6 +14,9 @@ from .forms import UserForm, ProfileForm
 from django.urls import reverse_lazy
 
 from django.http import HttpResponseRedirect
+
+from django.shortcuts import get_object_or_404
+
 
 # Create your views here.
 def profile(request):
@@ -119,22 +122,45 @@ self).get_context_data(**kwargs)
 
         return context
 
-class UserSettingsView(MultiModelFormView):
-    model = Profile
-    form_classes = {
-        'user_form' : UserForm,
-        'profile_form' : ProfileForm,
-    }
-    template_name= 'user/profile_settings.html'
-    context_object_name = "profile"
-    def get_context_data(self, **kwargs):
-        context = super(UserSettingsView,
-self).get_context_data(**kwargs)
-        context['user_list'] = User.objects.all()
-        context['imagepost_list'] = Imagepost.objects.all()
-        return context
-
 class SignUp(generic.CreateView):
     form_class = UserCreationForm
     success_url = '/user/login/?sgu_alert=1'
     template_name = 'registration/signup.html'    
+
+def user_edit(request):
+    user = get_object_or_404(User, pk=request.user.id)
+    if request.method == "POST":
+        form = UserForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.save()
+            return redirect('/user/settings/', pk=user.pk)
+    else:
+        form = UserForm(instance=user)
+    return render(request, 'user/user_settings.html', {'form': form})
+
+def profile_edit(request):
+    profile = get_object_or_404(Profile, pk=request.user.id)
+    if request.method == "POST":
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.save()
+            return redirect('/user/profile/settings/', pk=profile.pk)
+    else:
+        form = ProfileForm(instance=profile)
+    return render(request, 'user/profile_settings.html', {'form': form})
+
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('/user/profile/settings/')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'user/change_password.html', {'form': form})
