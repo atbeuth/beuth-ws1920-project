@@ -19,6 +19,7 @@ class ImagepostListView(ListView):
     context_object_name = "all_imgposts"
     paginate_by = 24
     template_name = 'web/home.html'
+    ordering = ["timestamp"]
 
 def image_resize_and_autorotate(imageFile, imageName):
     im = Image.open(imageFile)
