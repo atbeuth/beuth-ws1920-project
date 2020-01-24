@@ -33,7 +33,10 @@ def dict_key(d, k):
 def is_image_in_search(search, image):
     '''Returns true if the images is a result of the seacrh'''
     for term in search.split(" "):
-        if (term.upper() in image.title.upper()) or (term.upper() in image.description.upper()) or (term.upper() in image.long_description.upper()) or (term.upper() in image.category.upper()) or (term.upper() in image.user.username.upper()):
+        tags = []
+        for tag_list_whitespace in image.tags.upper().split(" "):
+            tags += tag_list_whitespace.split(",")
+        if (term.upper() in tags) or (term.upper() in image.title.upper()) or (term.upper() in image.description.upper()) or (term.upper() in image.long_description.upper()) or (term.upper() in image.category.upper()) or (term.upper() in image.user.username.upper()):
             return True
     return False
 
