@@ -32,7 +32,7 @@
 
 {% block content %}
 <div class="gallery-big">
-  {% for image in page_obj reversed %}
+  {% for image in page_obj %}
 
   {% include 'imageposts/snippet/img_card.html' with image=image user=user %}
 

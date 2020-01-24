@@ -1,5 +1,5 @@
 beautifulsoup4==4.8.1
-Django==2.2.6
+Django>=2.2.9
 django-bootstrap4==1.0.1
 django-default-imagefield==0.5.5
 django-multi-form-view==2.0.1
@@ -8,5 +8,3 @@ pytz==2019.3
 soupsieve==1.9.4
 sqlparse==0.3.0
 django-cleanup==4.0.0
-
--r multiform/requirements.txt
