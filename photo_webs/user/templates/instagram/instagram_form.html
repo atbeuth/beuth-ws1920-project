@@ -1,10 +1,39 @@
+{% extends "web/base.html" %}
 {% load bootstrap4 %}
 
-<div class="card-body">
-    <form method="post">
+
+{% block intro %}
+<div class="card text-center mt-5 bg-dark" style="border-radius: 0;">
+  <div class="card-body" style="background-image: url({{ user.profile.profile_banner.url }}); background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;">
+    
+    <img src="{{user.profile.profile_img.url}} " class="img-thumbnail" alt="">
+    
+  </div>
+  <div class="card-body bg-dark p-4">
+    <h5 class="card-title text-danger ">{{ user.username }}</h5>
+    </div>
+
+  <div class="card-footer text-muted bg-primary">
+    {% block nav1 %}<h6 class="text-dark pr-2 pl-2">Import Instagram Profile</h6>{% endblock nav1 %} 
+  </div>
+</div>
+{% endblock intro %}
+
+{% block content %}
+<div class="card m-5">
+  <h5 class="card-header">Instagram Account</h5>
+  <div class="card-body">
+    <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
+      <!--{{ form.as_p }}-->
       {% bootstrap_form form %}
-      <button class="btn btn-primary" type="submit">Sign up</button>
+      <p>
+      <a href="/user/settings/">Or change your account informations on PhotoHub</a>
+      </p>
+      <button class="btn btn-primary" type="submit">Submit</button>
     </form>
   </div>
 </div>
+{% endblock content %}
