@@ -62,3 +62,21 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+class InstagramProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    instagram_username = models.TextField(max_length=100, blank=True)
+    instagram_profile_img_url = models.TextField(max_length=100, blank=True)
+    instagram_posts = models.TextField(blank=True)
+
+    @receiver(post_save, sender=User)
+    def create_user_instaprofile(sender, instance, created, **kwargs):
+        if created:
+            InstagramProfile.objects.create(user=instance)
+
+    @receiver(post_save, sender=User)
+    def save_user_instaprofile(sender, instance, **kwargs):
+        instance.instagramprofile.save()
+
+
+

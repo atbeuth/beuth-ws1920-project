@@ -1,7 +1,7 @@
 from django import forms
 
 from django.contrib.auth.models import User
-from .models import Profile, Follower, Post
+from .models import Profile, Follower, Post, InstagramProfile
 
 class UserForm(forms.ModelForm):
 
@@ -21,3 +21,9 @@ class FollowerForm(forms.ModelForm):
         model = Follower
         fields = ['follower', 'following']
 
+
+class InstagramProfileForm(forms.ModelForm):
+
+    class Meta(object):
+        model = InstagramProfile
+        fields = ['instagram_username']
