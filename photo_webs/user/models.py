@@ -65,7 +65,7 @@ class Post(models.Model):
 
 class InstagramProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    instagram_username = models.TextField(max_length=100, blank=True)
+    instagram_username = models.TextField(max_length=30, blank=True)
     instagram_profile_img_url = models.TextField(max_length=100, blank=True)
     instagram_posts = models.TextField(blank=True)
     date_scraped = models.TextField(blank=True)
