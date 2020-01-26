@@ -19,6 +19,8 @@ from django.shortcuts import get_object_or_404
 
 from .scraper import InstagramImageScraper
 
+from datetime import datetime
+
 
 # Create your views here.
 def profile(request):
@@ -175,14 +177,7 @@ def change_password(request):
 def get_instagram_data(username):
     scraper = InstagramImageScraper()
     data = scraper.get_dict(username)
-
-    profile_img_url = data['profile']['profilPicturePath']
-    posts = []
-
-    for post in data['media']:
-        print(media)
-
-    return [profile_img_url, posts] 
+    return [data['profile']['profilPicturePath'], data['media']] 
 
 
 def add_insta_profile(request):
@@ -195,6 +190,7 @@ def add_insta_profile(request):
             data = get_instagram_data(form.cleaned_data['instagram_username'])
             insta_profile.instagram_profile_img_url = data[0]
             insta_profile.instagram_posts = data[1]
+            insta_profile.date_scraped = datetime.today().strftime('%Y-%m-%d')
 
             insta_profile.save()
             return redirect('/user/instagram/{}'.format(insta_profile.pk), pk=insta_profile.pk)

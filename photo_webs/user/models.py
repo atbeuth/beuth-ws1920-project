@@ -68,6 +68,7 @@ class InstagramProfile(models.Model):
     instagram_username = models.TextField(max_length=30, blank=True)
     instagram_profile_img_url = models.TextField(max_length=100, blank=True)
     instagram_posts = models.TextField(blank=True)
+    date_scraped = models.TextField(blank=True)
 
     @receiver(post_save, sender=User)
     def create_user_instaprofile(sender, instance, created, **kwargs):

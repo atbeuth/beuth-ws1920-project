@@ -1,4 +1,5 @@
 from django import template
+import json
 
 register = template.Library()
 
@@ -51,3 +52,14 @@ def int_to_list_string(num):
 @register.filter(name='to_string')
 def to_string(num):
     return str(num)
+
+@register.filter(name='to_insta_post')
+def to_insta_post(poststring):
+    post_list = []
+
+    post_list_temp = poststring.split("},")    
+    current_post_string = post_list_temp[0]
+    current_post_json = json.loads(current_post_string.replace("[", "").replace("'", '"').replace("True", "true").replace("False", "false") + "}")
+    post_list.append(current_post_json)
+
+    return post_list
