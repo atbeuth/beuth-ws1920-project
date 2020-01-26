@@ -193,7 +193,7 @@ def add_insta_profile(request):
             insta_profile.date_scraped = datetime.today().strftime('%Y-%m-%d')
 
             insta_profile.save()
-            return redirect('/user/instagram/{}'.format(insta_profile.pk), pk=insta_profile.pk)
+            return redirect('/user/{}/images'.format(request.user.id))
     else:
         form = InstagramProfileForm(instance=insta_profile)
     return render(request, 'instagram/instagram_form.html', {'form': form})
