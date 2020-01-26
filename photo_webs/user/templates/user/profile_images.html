@@ -8,28 +8,46 @@
 
 {% block content %}
 
+{% if user_p.instagramprofile.instagram_username %}
 <div class="card bg-dark" style="width: 100%;">
     <div class="card-body">
-        <h5 class="card-title text-light">Pinned</h5>
-        <h6 class="card-subtitle mb-2 text-muted">The photographer pinned these works</h6>
+        <h5 class="card-title text-light">Instagram profile <a href="https://www.instagram.com/{{ user_p.instagramprofile.instagram_username }}">@{{ user_p.instagramprofile.instagram_username }}</a> of {{ user_p.username }}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{ user_p.username }} shows some pictures from his Instagram profile from {{ user_p.instagramprofile.date_scraped }}</h6>
     </div>
 </div>
 
 <div class="gallery-big">
-    {% for image in imagepost_list reversed %}
-    {% if image.user == user_p and image.pinned %}
+    {% for insta_image in user_p.instagramprofile.instagram_posts|to_insta_post %}
 
-    {% include 'imageposts/snippet/img_card_mini.html' with image=image user=user_p %}
+    <p>insta_image</p>
 
-    {% endif %} {% endfor %}
+    {% endfor %}
+    {% endif %}
 </div>
 
-<div class="card bg-dark" style="width: 100%;">
-    <div class="card-body">
-        <h5 class="card-title text-light">Licensed pictures</h5>
-        <h6 class="card-subtitle mb-2 text-muted">These pictures were provided under special licenses. Read these carefully to know how to use the pictures</h6>
+    <div class="card bg-dark" style="width: 100%;">
+        <div class="card-body">
+            <h5 class="card-title text-light">Pinned</h5>
+            <h6 class="card-subtitle mb-2 text-muted">The photographer pinned these works</h6>
+        </div>
     </div>
-</div>
+
+    <div class="gallery-big">
+        {% for image in imagepost_list reversed %}
+        {% if image.user == user_p and image.pinned %}
+
+        {% include 'imageposts/snippet/img_card_mini.html' with image=image user=user_p %}
+
+        {% endif %} {% endfor %}
+    </div>
+
+    <div class="card bg-dark" style="width: 100%;">
+        <div class="card-body">
+            <h5 class="card-title text-light">Licensed pictures</h5>
+            <h6 class="card-subtitle mb-2 text-muted">These pictures were provided under special licenses. Read these
+                carefully to know how to use the pictures</h6>
+        </div>
+    </div>
 </div>
 
 <div class="gallery-big">
@@ -38,6 +56,6 @@
     {% include 'imageposts/snippet/img_card.html' with image=image user=user_p %}
 
     {% endif %} {% endfor %}
-    
+
 </div>
 {% endblock content %}
