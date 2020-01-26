@@ -175,14 +175,7 @@ def change_password(request):
 def get_instagram_data(username):
     scraper = InstagramImageScraper()
     data = scraper.get_dict(username)
-
-    profile_img_url = data['profile']['profilPicturePath']
-    posts = []
-
-    for post in data['media']:
-        print(media)
-
-    return [profile_img_url, posts] 
+    return [data['profile']['profilPicturePath'], data['media']] 
 
 
 def add_insta_profile(request):
