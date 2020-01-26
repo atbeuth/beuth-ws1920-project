@@ -18,7 +18,7 @@
   <div class="card-footer text-muted bg-primary">
       {% block nav1 %}<a href="/user/{{ user.id }}" class="text-dark pr-2 pl-2">Overview</a>{% endblock nav1 %}
       {% if user.is_authenticated %}
-      {% block nav2 %}<a href="#" class="text-light pr-2 pl-2">Edit Info</a>{% endblock nav2 %}
+      {% block nav2 %}<a href="/user/profile/settings/" class="text-dark pr-2 pl-2">Edit Info</a>{% endblock nav2 %}
       {% else %}
       {% block nav3 %}<a href="#" class="text-dark pr-2 pl-2">Bio</a>{% endblock nav3 %}
       {% endif%}
