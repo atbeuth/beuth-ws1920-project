@@ -29,12 +29,12 @@ class Media:
     def __init__(self, media_node):
         self.pictureUrl = 'https://www.instagram.com/p/%s/'
         try:
-            self.title = media_node['edge_media_to_caption']['edges'][0]['node']['text']
+            self.title = media_node['edge_media_to_caption']['edges'][0]['node']['text'].replace('"', '*/?"')
         except Exception as e:
             self.title = "<Could not parse title>"
 
         try:
-            self.alt_text = media_node['accessibility_caption']
+            self.alt_text = media_node['accessibility_caption'].replace('"', '*/?"')
         except Exception as e:
             self.alt_text = "<Could not parse alternate text>"
 
@@ -44,11 +44,11 @@ class Media:
 
     def to_obj(self):
         return {
-            'title': self.title,
-            'altText': self.alt_text,
-            'mediaPath': self.path,
-            'mediaSrc': self.src,
-            'isVideo': self.isVideo
+            "title": self.title,
+            "altText": self.alt_text,
+            "mediaPath": self.path,
+            "mediaSrc": self.src,
+            "isVideo": self.isVideo
         }
 
     def __repr__(self) -> str:

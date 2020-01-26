@@ -1,6 +1,8 @@
 from django import template
 import json
 
+from random import sample
+
 register = template.Library()
 
 @register.filter(name='get_search_description')
@@ -57,9 +59,22 @@ def to_string(num):
 def to_insta_post(poststring):
     post_list = []
 
-    post_list_temp = poststring.split("},")    
-    current_post_string = post_list_temp[0]
-    current_post_json = json.loads(current_post_string.replace("[", "").replace("'", '"').replace("True", "true").replace("False", "false") + "}")
-    post_list.append(current_post_json)
+    post_list_temp = poststring.split("},")
+
+    list_size = len(post_list_temp)
+
+    max_imgs = 12
+
+    if list_size <= max_imgs:
+        post_list_choices = post_list_temp
+    else:
+        post_list_choices = sample(post_list_temp, max_imgs)
+
+    for current_post_string in post_list_choices:
+        try:
+            current_post_json = json.loads(current_post_string.replace("[", "").replace("'", '"').replace('*/?"', "'").replace("True", "true").replace("False", "false") + "}")
+            post_list.append(current_post_json)
+        except Exception as e: 
+            print(e)
 
     return post_list
