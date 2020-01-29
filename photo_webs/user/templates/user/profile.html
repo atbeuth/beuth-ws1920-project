@@ -44,7 +44,7 @@
 
 {% block content %}
 <div class="gallery">
-{% for image in imagepost_list %}
+{% for image in imagepost_list reversed%}
 {% if image.user == user_p %}
 
 {% include 'imageposts/snippet/img_card_mini.html' with image=image user=user_p %}
