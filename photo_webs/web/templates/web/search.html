@@ -39,7 +39,7 @@
 
 <div class="gallery-big mini-cards">
     {% for user in all_users %}
-    {% if pk|is_user_in_search:user.username == True %}
+    {% if pk|is_user_in_search:user == True %}
     <div class="card bg-dark text-light">
         <div class="card-body">
         <a href="{% url 'user:profile' %}{{user.id}}" class="text-white">

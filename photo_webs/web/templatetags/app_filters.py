@@ -41,9 +41,9 @@ def is_image_in_search(search, image):
     return False
 
 @register.filter(name='is_user_in_search')
-def is_user_in_search(search, username):
+def is_user_in_search(search, user):
     for term in search.split(" "):
-        if term.upper() in username.upper():
+        if (term.upper() in user.username.upper()) or (term.upper() in user.profile.bio.upper()) or (term.upper() in user.profile.bio_short.upper()):
             return True
     return False
 
