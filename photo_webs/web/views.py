@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.shortcuts import render_to_response
 
 from imageposts.models import Imagepost
+from django.contrib.auth.models import User
 
 # Create your views here.
 def index(request):
@@ -19,4 +20,4 @@ def imprint(request):
 def imprint_de(request):
     return render(request, 'web/terms_de.html')
 def search(request, pk):
-    return render(request, 'web/search.html', {'pk':   pk, 'all_imgposts': reversed(Imagepost.objects.all())})
+    return render(request, 'web/search.html', {'pk':   pk, 'all_users': User.objects.all(),'all_imgposts': reversed(Imagepost.objects.all())})

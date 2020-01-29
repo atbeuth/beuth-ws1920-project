@@ -40,6 +40,14 @@ def is_image_in_search(search, image):
             return True
     return False
 
+@register.filter(name='is_user_in_search')
+def is_user_in_search(search, username):
+    for term in search.split(" "):
+        print(term + ":" + username)
+        if term.upper() in username.upper():
+            return True
+    return False
+
 @register.filter(name='split_text')
 def split_text(text, split_on="\n"):
     return text.split(split_on)
