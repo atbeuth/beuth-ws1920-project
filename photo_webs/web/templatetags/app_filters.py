@@ -36,14 +36,13 @@ def dict_key(d, k):
 def is_image_in_search(search, image):
     '''Returns true if the images is a result of the seacrh'''
     for term in search.split(" "):
-        if (term.upper() in image.title.upper()) or (term.upper() in image.description.upper()) or (term.upper() in image.long_description.upper()) or (term.upper() in image.category.upper()) or (term.upper() in image.user.username.upper()):
+        if (term.upper() in image.tags.upper()) or (term.upper() in image.title.upper()) or (term.upper() in image.description.upper()) or (term.upper() in image.long_description.upper()) or (term.upper() in image.category.upper()) or (term.upper() in image.user.username.upper()):
             return True
     return False
 
 @register.filter(name='is_user_in_search')
 def is_user_in_search(search, username):
     for term in search.split(" "):
-        print(term + ":" + username)
         if term.upper() in username.upper():
             return True
     return False
