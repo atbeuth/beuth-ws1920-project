@@ -27,7 +27,8 @@
 <div class="card bg-dark" style="width: 100%;">
     <div class="card-body">
         <h5 class="card-title text-light">Licensed pictures</h5>
-        <h6 class="card-subtitle mb-2 text-muted">These pictures were provided under special licenses. Read these carefully to know how to use the pictures</h6>
+        <h6 class="card-subtitle mb-2 text-muted">These pictures were provided under special licenses. Read these
+            carefully to know how to use the pictures</h6>
     </div>
 </div>
 </div>
@@ -38,6 +39,47 @@
     {% include 'imageposts/snippet/img_card.html' with image=image user=user_p %}
 
     {% endif %} {% endfor %}
-    
+
 </div>
+
+{% if user_p.instagramprofile.instagram_username %}
+<div class="card bg-dark" style="width: 100%;">
+    <div class="card-body">
+        <h5 class="card-title text-light">Instagram profile <a
+                href="https://www.instagram.com/{{ user_p.instagramprofile.instagram_username }}">@{{ user_p.instagramprofile.instagram_username }}</a>
+            of {{ user_p.username }}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{ user_p.username }} shows some pictures from his Instagram profile
+            from {{ user_p.instagramprofile.date_scraped }}</h6>
+    </div>
+</div>
+
+<div class="gallery-big">
+    {% for insta_image in user_p.instagramprofile.instagram_posts|to_insta_post %}
+
+    <!-- big imagepost card -->
+    <div class="card rounded-0 bg-dark card-border">
+        <div class="card-header text-light">
+            <a href="https://www.instagram.com/{{ user_p.instagramprofile.instagram_username }}" class="text-white">
+                <img src="{{ user_p.instagramprofile.instagram_profile_img_url }}"
+                    class="rounded border border-primary float-left mr-3 profile-images-mini"
+                    alt="Instagram Profile picture of {{ user_p.instagramprofile.instagram_username }}.">
+                {{ user_p.instagramprofile.instagram_username }}
+            </a>
+        </div>
+        <figure class="gallery_item-big m-0 p-0">
+            <img src="{{ insta_image.mediaSrc }}" class="gallery_img" alt="{{ insta_image.altText }}"
+                style="object-fit: cover">
+        </figure>
+        <div class="card-footer text-light">
+            <p class="text-light">{{ insta_image.title }}</p>
+            <a href="{{ insta_image.mediaPath }}" class="btn btn-outline-warning"><strong>Open</strong>
+            </a>
+        </div>
+    </div>
+    <!-- /big imagepost card -->
+
+    {% endfor %}
+    {% endif %}
+</div>
+
 {% endblock content %}

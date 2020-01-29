@@ -7,15 +7,19 @@ from django.views.generic import DetailView, ListView, UpdateView, FormView, Vie
 from django.contrib.auth.models import User
 from imageposts.models import Imagepost
 
-from .models import Profile, Follower, Post
+from .models import Profile, Follower, Post, InstagramProfile
 
 from multi_form_view import MultiModelFormView
-from .forms import UserForm, ProfileForm
+from .forms import UserForm, ProfileForm, InstagramProfileForm
 from django.urls import reverse_lazy
 
 from django.http import HttpResponseRedirect
 
 from django.shortcuts import get_object_or_404
+
+from .scraper import InstagramImageScraper
+
+from datetime import datetime
 
 
 # Create your views here.
@@ -164,3 +168,35 @@ def change_password(request):
     else:
         form = PasswordChangeForm(request.user)
     return render(request, 'user/change_password.html', {'form': form})
+
+#----------------
+#   instagram
+#----------------
+
+
+def get_instagram_data(username):
+    scraper = InstagramImageScraper()
+    data = scraper.get_dict(username)
+    return [data['profile']['profilPicturePath'], data['media']] 
+
+
+def add_insta_profile(request):
+    insta_profile = get_object_or_404(InstagramProfile, pk=request.user.instagramprofile.id)
+    if request.method == "POST":
+        form = InstagramProfileForm(request.POST, request.FILES, instance=insta_profile)
+        if form.is_valid():
+            insta_profile = form.save(commit=False)
+
+            data = get_instagram_data(form.cleaned_data['instagram_username'])
+            insta_profile.instagram_profile_img_url = data[0]
+            insta_profile.instagram_posts = data[1]
+            insta_profile.date_scraped = datetime.today().strftime('%Y-%m-%d')
+
+            insta_profile.save()
+            return redirect('/user/{}/images'.format(request.user.id))
+    else:
+        form = InstagramProfileForm(instance=insta_profile)
+    return render(request, 'instagram/instagram_form.html', {'form': form})
+
+def show_insta_profile(request, pk):
+    return render(request, 'instagram/instagram.html', {'pk':   pk, 'insta_profile': request.user.instagramprofile})
