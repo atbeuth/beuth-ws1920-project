@@ -299,7 +299,7 @@ footer a:nth-of-type(even) {
 
 /* form styles */
 #id_title {
-  width: 200px;
+  width: 200px, 5;
   height: 40px;
 }
 
@@ -308,16 +308,16 @@ footer a:nth-of-type(even) {
 }
 
 #id_long_description {
-  height: 200px;
+  height: 120px;
 }
 
 #id_tags {
-  width: 400px;
+  width: 200px, 5;
   height: 40px;
 }
 
 #id_category {
-  width: 400px;
+  width: 200px, 5;
   height: 40px;
 }
 
