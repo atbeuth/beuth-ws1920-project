@@ -1,0 +1,24 @@
+{% extends "user/profile.html" %}
+{% load bootstrap4 %}
+{% load app_filters %}
+
+{% block nav1 %}<a href="/user/{{ user_p.id }}" class="text-dark pr-2 pl-2">Overview</a>{% endblock nav1 %}
+{% block nav3 %}<a href="#" class="text-light pr-2 pl-2">Bio</a>{% endblock nav3 %}
+
+{% block content %}
+<div class="card-body bg-light" style="padding: 1.25rem 1.25rem 3rem 1.25rem;">
+    <div id="detail_card">
+         <div class="card-body" style="align-content: center;">
+            <h3 class="card-title text-center">Biography of {{user_p.username}}</h3>
+            <br>{% for line in user_p.profile.bio|split_text %}<p class="card-text text-center">{{ line }}</p>{% endfor %}
+            {% if user_p.instagramprofile.instagram_username != "" and user_p.instagramprofile.instagram_username != " " and user_p.instagramprofile %}
+            <br>
+            <h3 class="card-title text-center">Visit {{ user_p.username }} on Instagram <a href="https://www.instagram.com/{{ user_p.instagramprofile.instagram_username }}">@{{ user_p.instagramprofile.instagram_username }}</a></h3>
+            <div style="padding: 20px 45%;">
+            <img class="card-img-top" style="border-radius: 50%" src="{{ user_p.instagramprofile.instagram_profile_img_url }}">
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

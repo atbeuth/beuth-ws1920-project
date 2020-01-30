@@ -34,9 +34,9 @@
     {% if user.is_authenticated and user == user_p%}
     {% block nav2 %}<a href="/user/profile/settings" class="text-dark pr-2 pl-2">Edit Info</a>{% endblock nav2 %}
     {% else %}
-    {% block nav3 %}<a href="#" class="text-dark pr-2 pl-2">Bio</a>{% endblock nav3 %}
+    {% block nav3 %}<a href="/user/{{ user_p.id }}/bio" class="text-dark pr-2 pl-2">Bio</a>{% endblock nav3 %}
     {% endif%}
-    {% block nav4 %}<a href="images" class="text-dark pr-2 pl-2">Images</a>{% endblock nav4 %}
+    {% block nav4 %}<a href="/user/{{ user_p.id }}/images" class="text-dark pr-2 pl-2">Images</a>{% endblock nav4 %}
     {% block nav5 %}<a href="/user/{{ user_p.id }}/followers" class="text-dark pr-2 pl-2">Following</a>{% endblock nav5 %}
   </div>
 </div>

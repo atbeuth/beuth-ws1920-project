@@ -60,6 +60,11 @@ self).get_context_data(**kwargs)
 
         return context
 
+class UserBioView(DetailView):
+    model = User
+    template_name= 'user/bio.html'
+    context_object_name = "user_p"
+
 class UserImagesView(DetailView):
     model = User
     template_name= 'user/profile_images.html'
@@ -150,7 +155,7 @@ def profile_edit(request):
         if form.is_valid():
             profile = form.save(commit=False)
             profile.save()
-            return redirect('/user/profile/settings/', pk=profile.pk)
+            return redirect('/user/profile/settings/', pk=profile.pk, user=profile.user)
     else:
         form = ProfileForm(instance=profile)
     return render(request, 'user/profile_settings.html', {'form': form})

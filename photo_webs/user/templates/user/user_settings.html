@@ -11,26 +11,19 @@
     
   </div>
   <div class="card-body bg-dark p-4">
-    <h5 class="card-title text-danger ">{{ user.username }}</h5>
-    <p class="card-text text-light">{{ user.profile.bio_short }}</p>
-    {% if user.profile.show_email and user.email%}
-    <a href="mailto:{{ user.email }}?subject=PhotoHub" class="card-text text-primary">Email: {{ user.email }}</a>
-    {% endif%}
-
-    {% if user.profile.show_location and user.profile.location%}
-    <p class="card-text text-primary">Location: {{ user.profile.location }}</p>
-    {% endif%}
+    <h5 class="card-title text-danger ">{{ user.username }} {% if user.is_staff %}<span class="badge badge-secondary">PhotoHub-Team</span> {% endif %}{% if user.profile.is_verified %}<span class="badge badge-info">verified</span> {% endif %}{% if user.profile.is_pro %}<span class="badge badge-light">PRO</span> {% endif %}</h5>
     </div>
 
   <div class="card-footer text-muted bg-primary">
-    {% block nav1 %}<a href="/user/{{ user.id }}" class="text-dark pr-2 pl-2">Overview</a>{% endblock nav1 %}
-    {% if user.is_authenticated %}
-    {% block nav2 %}<a href="#" class="text-light pr-2 pl-2">Edit Info</a>{% endblock nav2 %}
-    {% else %}
-    {% block nav3 %}<a href="#" class="text-dark pr-2 pl-2">Bio</a>{% endblock nav3 %}
-    {% endif%}
-    {% block nav4 %}<a href="/user/{{ user.id }}/images" class="text-dark pr-2 pl-2">Images</a>{% endblock nav4 %}
-    {% block nav5 %}<a href="/user/{{ user.id }}/followers" class="text-dark pr-2 pl-2">Following</a>{% endblock nav5 %}
+      {% block nav1 %}<a href="/user/{{ user.id }}" class="text-dark pr-2 pl-2">Overview</a>{% endblock nav1 %}
+      {% if user.is_authenticated %}
+      {% block nav2 %}<a href="/user/profile/settings/" class="text-dark pr-2 pl-2">Edit Info</a>{% endblock nav2 %}
+      {% else %}
+      {% block nav3 %}<a href="#" class="text-dark pr-2 pl-2">Bio</a>{% endblock nav3 %}
+      {% endif%}
+      {% block nav4 %}<a href="/user/{{ user.id }}/images" class="text-dark pr-2 pl-2">Images</a>{% endblock nav4 %}
+      {% block nav5 %}<a href="/user/{{ user.id }}/followers" class="text-dark pr-2 pl-2">Following</a>{% endblock nav5 %}
+    </div>
   </div>
 </div>
 {% endblock intro %}
