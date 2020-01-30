@@ -1,5 +1,6 @@
-{% extends "user/profile.html" %}
+{% extends "web/base.html" %}
 {% load bootstrap4 %}
+
 
 {% block intro %}
 <div class="card text-center mt-5 bg-dark" style="border-radius: 0;">
@@ -11,7 +12,7 @@
     
   </div>
   <div class="card-body bg-dark p-4">
-    <h5 class="card-title text-danger ">{{ user.username }} {% if user.is_staff %}<span class="badge badge-secondary">PhotoHub-Team</span> {% endif %}{% if user.profile.is_verified %}<span class="badge badge-info">verified</span> {% endif %}{% if user.profile.is_pro %}<span class="badge badge-light">PRO</span> {% endif %}</h5>
+    <h5 class="card-title text-danger ">{{ user.username }}</h5>
     </div>
 
   <div class="card-footer text-muted bg-primary">
@@ -30,15 +31,14 @@
 
 {% block content %}
 <div class="card m-5">
-  <h5 class="card-header">User Settings</h5>
+  <h5 class="card-header">Instagram Account</h5>
   <div class="card-body">
     <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
       <!--{{ form.as_p }}-->
       {% bootstrap_form form %}
       <p>
-      <a href="/user/settings/password">Change password...</a><br>
-      <a href="/user/profile/settings/">Or change your profile appearance...</a>
+      <a href="/user/settings/">Or change your account informations on PhotoHub</a>
       </p>
       <button class="btn btn-primary" type="submit">Submit</button>
     </form>

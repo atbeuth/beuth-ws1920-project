@@ -19,6 +19,7 @@ class ImagepostListView(ListView):
     context_object_name = "all_imgposts"
     paginate_by = 24
     template_name = 'web/home.html'
+    ordering = ["-timestamp"]
 
 def image_resize_and_autorotate(imageFile, imageName):
     im = Image.open(imageFile)
@@ -125,7 +126,6 @@ def add_post(request):
 
             if not form.cleaned_data['license_text'] :
                 imagepost.license_text = PHOTOHUB_LICENSE
-
 
             imagepost.img = image_resize_and_autorotate(form.cleaned_data['img'], imagepost.img.name)
             imagepost.img_thumbnail = create_thumbnail(form.cleaned_data['img'], imagepost.img.name)

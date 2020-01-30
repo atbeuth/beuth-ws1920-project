@@ -16,7 +16,7 @@
     <br>
     <a href="{% url 'web:search' pk='wallpaper'|title %}" class="btn btn-primary">Wallpapers</a><a
       href="{% url 'web:search' pk='nature'|title %}" class="btn btn-primary ml-2 mr-2">Nature</a><a
-      href="{% url 'web:search' pk='free to use'|title %}" class="btn btn-primary">Free to use</a>
+      href="{% url 'web:search' pk='travel'|title %}" class="btn btn-primary">Travel</a>
     <br><br>
   </div>
   <div class="card-footer text-dark bg-primary">
@@ -32,10 +32,11 @@
 
 {% block content %}
 <div class="gallery-big">
-  {% for image in page_obj reversed %}
+  {% for image in page_obj %}
+  {% if image.img.url != "/uploaded_content/media/773433.jpg" and image.img_thumbnail.url != "/uploaded_content/media/773433.jpg"%}
 
   {% include 'imageposts/snippet/img_card.html' with image=image user=user %}
-
+  {% endif %}
   {% endfor %}
 </div>
  <!-- paginator -->

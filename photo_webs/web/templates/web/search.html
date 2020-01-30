@@ -30,6 +30,37 @@
 {% endblock intro %}
 
 {% block content %}
+<div class="card bg-dark" style="width: 100%;">
+    <div class="card-body">
+        <h5 class="card-title text-light">Users</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Discover great profiles related to your search</h6>
+    </div>
+</div>
+
+<div class="gallery-big mini-cards">
+    {% for user in all_users %}
+    {% if pk|is_user_in_search:user == True %}
+    <div class="card bg-dark text-light">
+        <div class="card-body">
+        <a href="{% url 'user:profile' %}{{user.id}}" class="text-white">
+            <img src="{{ user.profile.profile_img.url }}"
+                class="rounded border border-primary float-left mr-3" style="width: 50px;"
+                alt="Profile picture of {{ user.username }}.">
+            {{user}}
+            <br>{{user.profile.bio_short}}</a>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+
+<div class="card bg-dark" style="width: 100%;">
+    <div class="card-body">
+        <h5 class="card-title text-light">Images</h5>
+        <h6 class="card-subtitle mb-2 text-muted">We found these pictures for you</h6>
+    </div>
+</div>
+
 <div class="gallery-big">
 {% for image in all_imgposts %}
 {% if pk|is_image_in_search:image == True %}
