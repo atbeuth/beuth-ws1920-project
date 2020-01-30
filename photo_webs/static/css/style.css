@@ -147,6 +147,7 @@
 }
 
 .text {
+  padding-top: 33px;
   white-space: nowrap;
   color: white;
   font-size: 20px;
