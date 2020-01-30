@@ -5,12 +5,13 @@ from random import sample
 
 register = template.Library()
 
+
 @register.filter(name='get_search_description')
 def get_search_description(key):
     search_dict = {
         "ALPHABET": {
             "text": "",
-            "suggestions": ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"], 
+            "suggestions": ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"],
         },
         "WALLPAPER": {
             "text": "Awesome wallpapers for your desktop",
@@ -23,14 +24,43 @@ def get_search_description(key):
         "NATURE": {
             "text": "Wonderful pictures from our blue planet",
             "suggestions": ["Space", "Trees", "Food", "Wallpaper", "Buildings", "Animals", "Photography", "World"]
+        },
+        "SPORTS": {
+            "text": "Wonderful sport pictures",
+            "suggestions": ["Football", "Basketball", "Tennis", "Race", "Match", "Champion", "League"]
+        },
+        "BUILDING": {
+            "text": "Nice pictures of buildings",
+            "suggestions": ["city", "skyline", "house", "mosque", "church", "bridge"]
+        },
+
+        "ANIMALS": {
+            "text": "Beautiful animals of our planet",
+            "suggestions": ["monkey", "lion", "elefant", "bird", "fish"]
+        },
+
+        "TRAVEL": {
+            "text": "Ideas for your next trip? ",
+            "suggestions": ["trip", "travel", "hotel", "sea", "mountain", "relax"]
+        },
+        "PORTRAITS": {
+            "text": "Beautiful faces and portrait pictures",
+            "suggestions": ["face", "eyes", "mouth", "nose", "ears", "hair"]
+        },
+
+        "INTEREST": {
+            "text": "Interest from a Person",
+            "suggestions": ["Anime", "Gaming", "Manga", "Animations"]
         }
     }
     return search_dict.get(key.upper())
+
 
 @register.filter(name='dict_key')
 def dict_key(d, k):
     '''Returns the given key from a dictionary.'''
     return d[k]
+
 
 @register.filter(name='is_image_in_search')
 def is_image_in_search(search, image):
@@ -40,6 +70,7 @@ def is_image_in_search(search, image):
             return True
     return False
 
+
 @register.filter(name='is_user_in_search')
 def is_user_in_search(search, user):
     for term in search.split(" "):
@@ -47,20 +78,24 @@ def is_user_in_search(search, user):
             return True
     return False
 
+
 @register.filter(name='split_text')
 def split_text(text, split_on="\n"):
     return text.split(split_on)
+
 
 @register.filter(name='int_to_list_string')
 def int_to_list_string(num):
     int_string = ''
     for count in range(1, num + 1):
-            int_string += str(count)
+        int_string += str(count)
     return int_string
+
 
 @register.filter(name='to_string')
 def to_string(num):
     return str(num)
+
 
 @register.filter(name='to_insta_post')
 def to_insta_post(poststring):
@@ -79,9 +114,10 @@ def to_insta_post(poststring):
 
     for current_post_string in post_list_choices:
         try:
-            current_post_json = json.loads(current_post_string.replace("[", "").replace("'", '"').replace('*/?"', "'").replace("True", "true").replace("False", "false") + "}")
+            current_post_json = json.loads(current_post_string.replace("[", "").replace(
+                "'", '"').replace('*/?"', "'").replace("True", "true").replace("False", "false") + "}")
             post_list.append(current_post_json)
-        except Exception as e: 
+        except Exception as e:
             print(e)
 
     return post_list
