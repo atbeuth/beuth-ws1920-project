@@ -30,7 +30,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<img src="https://photohubteam.pythonanywhere.com/uploaded_content/media/PhotoHub_Homepage_qcW7OR5.jpg" alt="Screenshot of the PhotoHub-Homepage">
+<img src="https://ibb.co/4jDyKZ5" alt="Screenshot of the PhotoHub-Homepage">
 
 ---
 > We love pictures. We like the idea of making pictures usable for everyone and sharing art. However, we also want to give everyone the opportunity to distribute their pictures with a license of their choice. *Similar to software on GitHub*.
