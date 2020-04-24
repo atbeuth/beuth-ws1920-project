@@ -30,7 +30,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<a href="https://ibb.co/4jDyKZ5"><img src="https://i.ibb.co/4jDyKZ5/PhotoHub.png" alt="PhotoHub" border="0"></a>
+<a href="https://ibb.co/4jDyKZ5"><img src="https://i.ibb.co/bryhQg8/PhotoHub.png" alt="PhotoHub" border="0"></a>
 
 ---
 > We love pictures. We like the idea of making pictures usable for everyone and sharing art. However, we also want to give everyone the opportunity to distribute their pictures with a license of their choice. *Similar to software on GitHub*.
