@@ -6,18 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('imageposts', '0001_initial'),
+        ("imageposts", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='imagepost',
-            name='freeuse',
+            model_name="imagepost",
+            name="freeuse",
             field=models.BooleanField(default=True),
         ),
         migrations.AlterField(
-            model_name='imagepost',
-            name='img',
-            field=models.ImageField(null=True, upload_to='media'),
+            model_name="imagepost",
+            name="img",
+            field=models.ImageField(null=True, upload_to="media"),
         ),
     ]

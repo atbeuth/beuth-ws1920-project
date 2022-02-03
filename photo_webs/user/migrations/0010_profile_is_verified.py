@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('user', '0009_follower'),
+        ("user", "0009_follower"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='profile',
-            name='is_verified',
+            model_name="profile",
+            name="is_verified",
             field=models.BooleanField(default=False),
         ),
     ]

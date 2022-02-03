@@ -13,27 +13,22 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path, include
-from django.views.generic.base import TemplateView
-
 from django.conf import settings
 from django.conf.urls.static import static
-
-from imageposts.views import ImagepostListView
-
+from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.urls import include, path
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    #path('', include('web.urls')),
-    path('user/', include('django.contrib.auth.urls')),
-    path('user/', include('user.urls')),
-    path('imageposts/', include('imageposts.urls')),
-    path('', include('web.urls')),
-    #path('', ImagepostListView.as_view(), name='all-imgposts'),
-    #path('', include('images.urls')),
-    ]
+    path("admin/", admin.site.urls),
+    # path('', include('web.urls')),
+    path("user/", include("django.contrib.auth.urls")),
+    path("user/", include("user.urls")),
+    path("imageposts/", include("imageposts.urls")),
+    path("", include("web.urls")),
+    # path('', ImagepostListView.as_view(), name='all-imgposts'),
+    # path('', include('images.urls')),
+]
 
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

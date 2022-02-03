@@ -6,17 +6,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('imageposts', '0012_auto_20191219_0826'),
+        ("imageposts", "0012_auto_20191219_0826"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='imagepost',
-            name='freeuse',
+            model_name="imagepost",
+            name="freeuse",
         ),
         migrations.AddField(
-            model_name='imagepost',
-            name='license_text',
+            model_name="imagepost",
+            name="license_text",
             field=models.TextField(null=True),
         ),
     ]

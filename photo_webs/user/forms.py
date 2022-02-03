@@ -1,29 +1,37 @@
 from django import forms
-
 from django.contrib.auth.models import User
-from .models import Profile, Follower, Post, InstagramProfile
+
+from .models import Follower, InstagramProfile, Profile
+
 
 class UserForm(forms.ModelForm):
-
     class Meta(object):
         model = User
-        fields = ['username', 'email']
+        fields = ["username", "email"]
+
 
 class ProfileForm(forms.ModelForm):
-
     class Meta(object):
         model = Profile
-        fields = ['profile_img', 'profile_banner', 'bio_short', 'bio', 'location', 'show_location', 'show_email', 'birth_date']
+        fields = [
+            "profile_img",
+            "profile_banner",
+            "bio_short",
+            "bio",
+            "location",
+            "show_location",
+            "show_email",
+            "birth_date",
+        ]
+
 
 class FollowerForm(forms.ModelForm):
-
     class Meta(object):
         model = Follower
-        fields = ['follower', 'following']
+        fields = ["follower", "following"]
 
 
 class InstagramProfileForm(forms.ModelForm):
-
     class Meta(object):
         model = InstagramProfile
-        fields = ['instagram_username']
+        fields = ["instagram_username"]

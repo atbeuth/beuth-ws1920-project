@@ -6,13 +6,25 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('imageposts', '0005_imagepost_pinned'),
+        ("imageposts", "0005_imagepost_pinned"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='imagepost',
-            name='category',
-            field=models.CharField(choices=[('nature', 'NATURE'), ('humans', 'HUMANS'), ('animals', 'ANIMALS'), ('buildings', 'BUILDINGS'), ('abstract', 'ABSTRACT'), ('wallpaper', 'WALLPAPER'), ('no category', 'NO CATEGORY')], default='green', max_length=6),
+            model_name="imagepost",
+            name="category",
+            field=models.CharField(
+                choices=[
+                    ("nature", "NATURE"),
+                    ("humans", "HUMANS"),
+                    ("animals", "ANIMALS"),
+                    ("buildings", "BUILDINGS"),
+                    ("abstract", "ABSTRACT"),
+                    ("wallpaper", "WALLPAPER"),
+                    ("no category", "NO CATEGORY"),
+                ],
+                default="green",
+                max_length=6,
+            ),
         ),
     ]
